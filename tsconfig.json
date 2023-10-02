@@ -25,5 +25,5 @@
     "strictPropertyInitialization": true,
     "strictBindCallApply": true
   },
-  "include": ["src"]
+  "include": ["src", "commitlint.config.ts"]
 }
