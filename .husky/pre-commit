@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+npx tsc --noEmit
+
+RETURN=$?
+
+if [ $RETURN -ne 0 ];
+then
+  echo "@@@@@@ Pre-commit checks failed! Please fix your code before committing! @@@@@@"
+  exit $RETURN
+fi
