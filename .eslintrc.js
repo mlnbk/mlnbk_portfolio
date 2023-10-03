@@ -5,7 +5,10 @@ module.exports = {
   },
   root: true,
   parser: '@typescript-eslint/parser',
-  extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
   parserOptions: {
     sourceType: 'module',
     tsconfigRootDir: __dirname,
@@ -13,5 +16,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   ignorePatterns: ['.eslintrc.js'],
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
+  },
 };
