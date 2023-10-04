@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect, MutableRefObject } from 'react';
+import { FC, useRef, useEffect } from 'react';
 
 import * as THREE from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
@@ -17,27 +17,37 @@ const spaceVals = [
 ];
 
 interface GalaxyProps {
-  dof: MutableRefObject<any>;
+  position: { x: number; y: number; z: number };
+  radius?: number;
+  speed?: number;
 }
 
-const Galaxy: FC<GalaxyProps> = ({ dof }) => {
+const Galaxy: FC<GalaxyProps> = ({ position, radius = 1, speed = 1 }) => {
   const { size } = useThree();
+
+  useFrame(({ clock }) => {
+    if (planetContainer.current) {
+      const elapsedTime = clock.getElapsedTime();
+      const x = position.x + radius * Math.cos(speed * elapsedTime);
+      const z = position.z + radius * Math.sin(speed * elapsedTime);
+      planetContainer.current.position.set(x, position.y, z);
+    }
+  });
 
   const parameters = {
     count: 5,
-    spin: -1.25,
-    opacity: 1,
     focusDistance: 1,
     focalLength: 1,
     width: size.width,
     height: size.height,
-    focusX: 0,
-    focusY: 0,
-    focusZ: 0,
+    focusX: position.x / 2,
+    focusY: position.y / 2,
+    focusZ: position.z / 2,
   };
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   planetContainer.current.add(ambientLight);
+  planetContainer.current.position.set(position.x, position.y, position.z);
   const planet = new THREE.Object3D();
   const geometry = new THREE.SphereGeometry(10, 32, 32);
   const material = new THREE.MeshBasicMaterial({
@@ -53,23 +63,6 @@ const Galaxy: FC<GalaxyProps> = ({ dof }) => {
     generatePlanets();
   }, [size]);
 
-  useFrame(() => {
-    if (dof.current) {
-      dof.current.circleOfConfusionMaterial.uniforms.focusDistance.value =
-        parameters.focusDistance;
-      dof.current.circleOfConfusionMaterial.uniforms.focalLength.value =
-        parameters.focalLength;
-      dof.current.resolution.height = parameters.height;
-      dof.current.resolution.width = parameters.width;
-      dof.current.target = new THREE.Vector3(
-        parameters.focusX,
-        parameters.focusY,
-        parameters.focusZ,
-      );
-      dof.current.blendMode.opacity.value = parameters.opacity;
-    }
-  });
-
   const generatePlanets = () => {
     planetContainer.current.clear();
     const planetGroup = new THREE.Object3D();
@@ -80,7 +73,7 @@ const Galaxy: FC<GalaxyProps> = ({ dof }) => {
       const planetRadius = (0.9 + Math.random() * 0.9) * maxPlanetRadius;
 
       const screenFactor =
-        Math.min(parameters.width, parameters.height) * 0.002;
+        Math.min(parameters.width, parameters.height) * 0.001;
       const { x, y, z } = spaceVals[i];
       const planetPosition = new THREE.Vector3(
         x * screenFactor,
@@ -103,7 +96,10 @@ const Galaxy: FC<GalaxyProps> = ({ dof }) => {
   };
 
   return (
-    <group>
+    <group
+      ref={planetContainer}
+      position={[position.x, position.y, position.z]}
+    >
       <primitive object={planetContainer.current} />
     </group>
   );
