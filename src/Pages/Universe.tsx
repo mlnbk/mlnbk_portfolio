@@ -10,10 +10,11 @@ const Universe: FC = () => {
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       <div className="text-white">Welcome to My Coding Universe!</div>
-      <Canvas camera={{ position: [0, 0, 0.8] }}>
+      <Canvas camera={{ position: [0, 0, 1] }}>
         <OrbitControls
-          autoRotate={false}
-          autoRotateSpeed={1}
+          autoRotate={true}
+          autoRotateSpeed={2}
+          reverseOrbit
           zoomSpeed={0.75}
         />
         <Galaxy dof={dof} />

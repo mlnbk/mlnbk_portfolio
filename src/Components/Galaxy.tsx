@@ -1,32 +1,36 @@
-import { CSSProperties, FC, useRef, useEffect, MutableRefObject } from 'react';
+import { FC, useRef, useEffect, MutableRefObject } from 'react';
 
 import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 
-// import Planet from './Planet';
+const spaceVals = [
+  { x: 0.0369, y: 0.1368, z: -0.2367 },
+  { x: -0.0963, y: 0.1962, z: 0.2961 },
+  { x: 0.1701, y: -0.267, z: 0.0369 },
+  { x: -0.1296, y: 0.2367, z: -0.1962 },
+  { x: 0.2367, y: -0.0369, z: 0.0963 },
+  { x: 0.1035, y: -0.2034, z: -0.2703 },
+  { x: -0.0702, y: 0.1701, z: 0.0036 },
+  { x: 0.2703, y: -0.0702, z: -0.1701 },
+  { x: -0.2367, y: 0.0036, z: 0.1035 },
+  { x: 0.0702, y: -0.1701, z: 0.2367 },
+];
 
 interface GalaxyProps {
   dof: MutableRefObject<any>;
 }
 
 const Galaxy: FC<GalaxyProps> = ({ dof }) => {
+  const { size } = useThree();
+
   const parameters = {
-    count: 1,
-    size: 0.4,
-    radius: 2,
-    branches: 4,
+    count: 5,
     spin: -1.25,
-    randomness: 0.3,
-    randomnessPower: 3,
-    insideColor: '#ff6030',
-    outsideColor: '#1b3984',
-    animate: true,
-    mouse: false,
     opacity: 1,
-    focusDistance: 0.5,
-    focalLength: 0.5,
-    width: 1000,
-    height: 1000,
+    focusDistance: 1,
+    focalLength: 1,
+    width: size.width,
+    height: size.height,
     focusX: 0,
     focusY: 0,
     focusZ: 0,
@@ -47,9 +51,9 @@ const Galaxy: FC<GalaxyProps> = ({ dof }) => {
 
   useEffect(() => {
     generatePlanets();
-  });
+  }, [size]);
 
-  useFrame((state) => {
+  useFrame(() => {
     if (dof.current) {
       dof.current.circleOfConfusionMaterial.uniforms.focusDistance.value =
         parameters.focusDistance;
@@ -64,81 +68,38 @@ const Galaxy: FC<GalaxyProps> = ({ dof }) => {
       );
       dof.current.blendMode.opacity.value = parameters.opacity;
     }
-
-    if (parameters.mouse) {
-      planetContainer.current.rotation.x = THREE.MathUtils.lerp(
-        planetContainer.current.rotation.x,
-        state.mouse.y / 10,
-        0.2,
-      );
-      planetContainer.current.rotation.y = THREE.MathUtils.lerp(
-        planetContainer.current.rotation.y,
-        -state.mouse.x / 2,
-        0.2,
-      );
-    }
-
-    if (parameters.animate) {
-      const elapsedTime = state.clock.getElapsedTime();
-      planetContainer.current.rotation.y = -0.02 * elapsedTime;
-    }
   });
 
   const generatePlanets = () => {
+    planetContainer.current.clear();
     const planetGroup = new THREE.Object3D();
-    const positions = new Float32Array(parameters.count * 3);
-    const colors = new Float32Array(parameters.count * 3);
-    const colorInside = new THREE.Color(1.0, 0.3765, 0.1882);
-    const colorOutside = new THREE.Color(0.10588, 0.22353, 0.51765);
-    const maxPlanetRadius = 0.01;
+    const maxPlanetRadius = 0.02;
 
     for (let i = 0; i < parameters.count; i++) {
-      const i3 = i * 3;
       const planetColors = ['#FF5733', '#44D3A5', '#D144A5'];
       const planetRadius = (0.9 + Math.random() * 0.9) * maxPlanetRadius;
 
-      const radius = Math.random() * parameters.radius;
-      const spinAngle = radius * parameters.spin;
-      const branchAngle =
-        ((i % parameters.branches) / parameters.branches) * Math.PI * 2;
+      const screenFactor =
+        Math.min(parameters.width, parameters.height) * 0.002;
+      const { x, y, z } = spaceVals[i];
+      const planetPosition = new THREE.Vector3(
+        x * screenFactor,
+        y * screenFactor,
+        z * screenFactor,
+      );
 
-      const randomX =
-        Math.pow(Math.random(), parameters.randomnessPower) *
-        (Math.random() < 0.5 ? 1 : -1) *
-        parameters.randomness *
-        radius;
-      const randomY =
-        Math.pow(Math.random(), parameters.randomnessPower) *
-        (Math.random() < 0.5 ? 1 : -1) *
-        parameters.randomness *
-        radius;
-      const randomZ =
-        Math.pow(Math.random(), parameters.randomnessPower) *
-        (Math.random() < 0.5 ? 1 : -1) *
-        parameters.randomness *
-        radius;
-
-      positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
-      positions[i3 + 1] = randomY;
-      positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
-
-      const mixedColor = colorInside.clone();
-      mixedColor.lerp(colorOutside, radius / parameters.radius);
-
-      colors[i3] = mixedColor.r;
-      colors[i3 + 1] = mixedColor.g;
-      colors[i3 + 2] = mixedColor.b;
-
-      const planetGeometry = new THREE.SphereGeometry(planetRadius, 32, 32);
+      const planetGeometry = new THREE.SphereGeometry(planetRadius, 64, 64);
       const planetMaterial = new THREE.MeshPhongMaterial({
         color: planetColors[Math.floor(Math.random() * planetColors.length)],
       });
       const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
-      planetMesh.position.set(randomX, randomY, randomZ);
+
+      planetMesh.position.copy(planetPosition);
       planetGroup.add(planetMesh);
     }
 
     planetContainer.current.add(planetGroup);
+    planetContainer.current.add(ambientLight);
   };
 
   return (
