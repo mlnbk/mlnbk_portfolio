@@ -9,20 +9,21 @@ const spaceVals = [
   { x: 0.1701, y: -0.267, z: 0.0369 },
   { x: -0.1296, y: 0.2367, z: -0.1962 },
   { x: 0.2367, y: -0.0369, z: 0.0963 },
-  { x: 0.1035, y: -0.2034, z: -0.2703 },
-  { x: -0.0702, y: 0.1701, z: 0.0036 },
-  { x: 0.2703, y: -0.0702, z: -0.1701 },
-  { x: -0.2367, y: 0.0036, z: 0.1035 },
-  { x: 0.0702, y: -0.1701, z: 0.2367 },
 ];
 
 interface GalaxyProps {
   position: { x: number; y: number; z: number };
+  planets: any; // TODO: array of projects
   radius?: number;
   speed?: number;
 }
 
-const Galaxy: FC<GalaxyProps> = ({ position, radius = 1, speed = 1 }) => {
+const Galaxy: FC<GalaxyProps> = ({
+  planets,
+  position,
+  radius = 1,
+  speed = 1,
+}) => {
   const { size } = useThree();
 
   useFrame(({ clock }) => {
@@ -34,16 +35,6 @@ const Galaxy: FC<GalaxyProps> = ({ position, radius = 1, speed = 1 }) => {
     }
   });
 
-  const parameters = {
-    count: 5,
-    focusDistance: 1,
-    focalLength: 1,
-    width: size.width,
-    height: size.height,
-    focusX: position.x / 2,
-    focusY: position.y / 2,
-    focusZ: position.z / 2,
-  };
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   planetContainer.current.add(ambientLight);
@@ -68,12 +59,11 @@ const Galaxy: FC<GalaxyProps> = ({ position, radius = 1, speed = 1 }) => {
     const planetGroup = new THREE.Object3D();
     const maxPlanetRadius = 0.02;
 
-    for (let i = 0; i < parameters.count; i++) {
+    for (let i = 0; i < planets.length; i++) {
       const planetColors = ['#FF5733', '#44D3A5', '#D144A5'];
       const planetRadius = (0.9 + Math.random() * 0.9) * maxPlanetRadius;
 
-      const screenFactor =
-        Math.min(parameters.width, parameters.height) * 0.001;
+      const screenFactor = Math.min(size.width, size.height) * 0.001;
       const { x, y, z } = spaceVals[i];
       const planetPosition = new THREE.Vector3(
         x * screenFactor,
