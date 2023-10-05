@@ -13,14 +13,14 @@ export const galaxyScreenFactor = 0.0015;
 export const planetPositions = [
   { x: 0.0369, y: 0.1368, z: -0.2367 },
   { x: -0.0963, y: 0.1962, z: 0.2961 },
-  { x: 0.1701, y: -0.267, z: 0.0369 },
+  { x: 0.1701, y: -0.1962, z: 0.0369 },
   { x: -0.1296, y: 0.2367, z: -0.1962 },
   { x: 0.2367, y: -0.0369, z: 0.0963 },
 ];
 
-export const planetScreenFactor = 0.0003;
+export const planetScreenFactor = 0.0005;
 
-export const maxPlanetRadius = 0.009;
+export const maxPlanetRadius = 0.015;
 export const maxStarRadius = 0.0015;
 
 export const numOfStars = 80;

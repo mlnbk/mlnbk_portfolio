@@ -16,6 +16,9 @@ interface GalaxyProps {
   planets: any; // TODO: array of projects
   radius?: number;
   speed?: number;
+  isHovered: boolean;
+  onHover: () => void;
+  onUnhover: () => void;
 }
 
 const Galaxy: FC<GalaxyProps> = ({
@@ -23,6 +26,9 @@ const Galaxy: FC<GalaxyProps> = ({
   position,
   radius = 1,
   speed = 1,
+  isHovered,
+  onHover,
+  onUnhover,
 }) => {
   const { size } = useThree();
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
@@ -49,7 +55,7 @@ const Galaxy: FC<GalaxyProps> = ({
 
       const planetGeometry = new THREE.SphereGeometry(planetRadius, 64, 64);
       const planetMaterial = new THREE.MeshPhongMaterial({
-        color: planetColors[Math.floor(Math.random() * planetColors.length)],
+        color: planetColors[i],
       });
       const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
 
@@ -89,13 +95,12 @@ const Galaxy: FC<GalaxyProps> = ({
       starsGroup.add(starMesh);
     }
     starsContainer.current.add(starsGroup);
-    planetContainer.current.add(ambientLight);
   };
 
   useEffect(() => {
     generatePlanets();
     generateStars();
-  }, [size]);
+  }, [size.height, size.width]);
 
   useFrame(({ clock }) => {
     if (planetContainer.current) {
@@ -116,15 +121,25 @@ const Galaxy: FC<GalaxyProps> = ({
 
   return (
     <>
+      <mesh
+        onPointerOver={onHover}
+        onPointerOut={onUnhover}
+        position={[position.x, position.y, position.z]}
+      >
+        <planeGeometry args={[3 * radius, 3 * radius]} />
+        <meshBasicMaterial transparent opacity={0} />
+      </mesh>
       <group
         ref={planetContainer}
         position={[position.x, position.y, position.z]}
+        scale={isHovered ? 1.5 : 1}
       >
         <primitive object={planetContainer.current} />
       </group>
       <group
         ref={starsContainer}
         position={[position.x, position.y, position.z]}
+        scale={isHovered ? 1.5 : 1}
       >
         <primitive object={starsContainer.current} />
       </group>
