@@ -11,12 +11,9 @@ import Galaxy from '../Components/Galaxy';
 type GalaxyPosition = { x: number; y: number; z: number };
 
 const Universe: FC = () => {
+  const [hoveredGalaxy, setHoveredGalaxy] = useState<number | null>(null);
   const [galaxyPositions, setGalaxyPositions] = useState<GalaxyPosition[]>([]);
   const [showText, setShowText] = useState(false);
-
-  useEffect(() => {
-    setShowText(true);
-  }, []);
 
   const updateGalaxyPositions = () => {
     const screenFactor =
@@ -29,6 +26,14 @@ const Universe: FC = () => {
       })),
     );
   };
+
+  const handleGalaxyHover = (index: number | null) => {
+    setHoveredGalaxy(index);
+  };
+
+  useEffect(() => {
+    setShowText(true);
+  }, []);
 
   useEffect(() => {
     updateGalaxyPositions();
@@ -53,17 +58,18 @@ const Universe: FC = () => {
         </p>
       </div>
       <Canvas camera={{ position: [0, 0, 1] }}>
-        <group>
-          {galaxyPositions.map((position, index) => (
-            <Galaxy
-              key={index}
-              position={position}
-              planets={Array.from({ length: 5 })}
-              radius={0.1}
-              speed={galaxyOrbitSpeeds[index]}
-            />
-          ))}
-        </group>
+        {galaxyPositions.map((position, index) => (
+          <Galaxy
+            key={index}
+            position={position}
+            planets={Array.from({ length: 5 })}
+            radius={0.1}
+            speed={galaxyOrbitSpeeds[index]}
+            isHovered={hoveredGalaxy === index}
+            onHover={() => handleGalaxyHover(index)}
+            onUnhover={() => handleGalaxyHover(null)}
+          />
+        ))}
       </Canvas>
     </div>
   );
