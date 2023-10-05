@@ -103,19 +103,37 @@ const Galaxy: FC<GalaxyProps> = ({
   }, [size.height, size.width]);
 
   useFrame(({ clock }) => {
+    const elapsedTime = clock.getElapsedTime();
+    const positionVector = new THREE.Vector3(
+      position.x,
+      position.y,
+      position.z,
+    );
+    const rotationAxisStart = new THREE.Vector3(3, 3, 2);
+    const rotationAxisEnd = new THREE.Vector3(-3, -3, -2);
+    const rotationMatrix = new THREE.Matrix4();
+
     if (planetContainer.current) {
-      const elapsedTime = clock.getElapsedTime();
-      const x = position.x + radius * Math.cos(speed * elapsedTime);
-      const y = position.y + radius * 0.2 * Math.sin(speed * elapsedTime);
-      const z = position.z + radius * Math.sin(speed * elapsedTime);
-      planetContainer.current.position.set(x, y, z);
+      rotationMatrix.makeRotationAxis(
+        new THREE.Vector3()
+          .subVectors(rotationAxisEnd, rotationAxisStart)
+          .normalize(),
+        speed * elapsedTime,
+      );
+
+      planetContainer.current.setRotationFromMatrix(rotationMatrix);
+      planetContainer.current.position.copy(positionVector);
     }
     if (starsContainer.current) {
-      const elapsedTime = clock.getElapsedTime();
-      const x = position.x + (radius / 2) * Math.cos(speed * elapsedTime);
-      const y = position.y + (radius / 2) * 0.2 * Math.sin(speed * elapsedTime);
-      const z = position.z + (radius / 2) * Math.sin(speed * elapsedTime);
-      starsContainer.current.position.set(x, y, z);
+      rotationMatrix.makeRotationAxis(
+        new THREE.Vector3()
+          .subVectors(rotationAxisEnd, rotationAxisStart)
+          .normalize(),
+        speed * elapsedTime,
+      );
+
+      starsContainer.current.setRotationFromMatrix(rotationMatrix);
+      starsContainer.current.position.copy(positionVector);
     }
   });
 

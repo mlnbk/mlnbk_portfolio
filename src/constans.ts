@@ -6,7 +6,7 @@ export const galaxyPositions = [
   { x: 0, y: 0, z: 0 },
 ];
 
-export const galaxyOrbitSpeeds = [0.1, 0.2, 0.4, 0.5, 0.7];
+export const galaxyOrbitSpeeds = [0.3, 0.25, 0.2, 0.3, 0.1];
 
 export const galaxyScreenFactor = 0.0015;
 
