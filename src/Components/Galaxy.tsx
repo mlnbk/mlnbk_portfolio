@@ -2,6 +2,7 @@ import { FC, useRef, useEffect } from 'react';
 
 import * as THREE from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
+import { useNavigate } from 'react-router-dom';
 
 import {
   maxPlanetRadius,
@@ -30,10 +31,10 @@ const Galaxy: FC<GalaxyProps> = ({
   onHover,
   onUnhover,
 }) => {
+  const navigate = useNavigate();
   const { size } = useThree();
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
   const starsContainer = useRef<THREE.Group>(new THREE.Group());
-
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 
   const generatePlanets = () => {
@@ -97,6 +98,11 @@ const Galaxy: FC<GalaxyProps> = ({
     starsContainer.current.add(starsGroup);
   };
 
+  const handleGalaxyClick = () => {
+    const galaxyId = 'statistics';
+    navigate(`/${galaxyId}`);
+  };
+
   useEffect(() => {
     generatePlanets();
     generateStars();
@@ -140,6 +146,7 @@ const Galaxy: FC<GalaxyProps> = ({
   return (
     <>
       <mesh
+        onClick={handleGalaxyClick}
         onPointerOver={onHover}
         onPointerOut={onUnhover}
         position={[position.x, position.y, position.z]}
