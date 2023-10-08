@@ -1,9 +1,10 @@
+import { MutableRefObject } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
 interface GalaxyRotationProps {
-  planetContainer: THREE.Group;
-  starsContainer: THREE.Group;
+  planetContainer: MutableRefObject<THREE.Group<THREE.Object3DEventMap>>;
+  starsContainer: MutableRefObject<THREE.Group<THREE.Object3DEventMap>>;
   position: { x: number; y: number; z: number };
   speed: number;
 }
@@ -33,7 +34,7 @@ export const useGalaxyRotation = ({
         speed * elapsedTime,
       );
 
-      planetContainer.setRotationFromMatrix(rotationMatrix);
+      planetContainer.current.setRotationFromMatrix(rotationMatrix);
     }
 
     if (starsContainer) {
@@ -44,8 +45,8 @@ export const useGalaxyRotation = ({
         speed * elapsedTime,
       );
 
-      starsContainer.setRotationFromMatrix(rotationMatrix);
-      starsContainer.position.copy(positionVector);
+      starsContainer.current.setRotationFromMatrix(rotationMatrix);
+      starsContainer.current.position.copy(positionVector);
     }
   });
 };

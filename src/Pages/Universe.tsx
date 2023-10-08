@@ -1,33 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 
-import {
-  dynamicGalaxyPositions,
-  galaxyData,
-  galaxyOrbitSpeeds,
-  galaxyScreenFactor,
-} from '../constans';
+import { galaxyData, galaxyOrbitSpeeds } from '../constans';
 import Galaxy from '../Components/Galaxy';
-
-type GalaxyPosition = { x: number; y: number; z: number };
+import { useGalaxyPositions } from '../Hooks/useGalaxyPositions';
 
 const Universe: FC = () => {
   const [hoveredGalaxy, setHoveredGalaxy] = useState<number | null>(null);
-  const [galaxyPositions, setGalaxyPositions] = useState<GalaxyPosition[]>([]);
   const [showText, setShowText] = useState(false);
-
-  const updateGalaxyPositions = () => {
-    const screenFactor =
-      Math.min(window.innerWidth, window.innerHeight) * galaxyScreenFactor;
-    const positions = dynamicGalaxyPositions(galaxyData.length);
-    setGalaxyPositions(
-      positions.map((position) => ({
-        x: position.x * screenFactor,
-        y: position.y * screenFactor,
-        z: position.z * screenFactor,
-      })),
-    );
-  };
+  const galaxyPositions = useGalaxyPositions();
 
   const handleGalaxyHover = (index: number | null) => {
     setHoveredGalaxy(index);
@@ -35,16 +16,6 @@ const Universe: FC = () => {
 
   useEffect(() => {
     setShowText(true);
-  }, []);
-
-  useEffect(() => {
-    updateGalaxyPositions();
-
-    window.addEventListener('resize', updateGalaxyPositions);
-
-    return () => {
-      window.removeEventListener('resize', updateGalaxyPositions);
-    };
   }, []);
 
   return (
@@ -65,6 +36,7 @@ const Universe: FC = () => {
         {galaxyData.map((galaxy, index) => (
           <Galaxy
             key={index}
+            index={index}
             position={galaxyPositions[index]}
             planets={Array.from({ length: 5 })}
             radius={0.1}

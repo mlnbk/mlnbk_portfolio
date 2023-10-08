@@ -1,17 +1,17 @@
 import { Canvas } from '@react-three/fiber';
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import * as THREE from 'three';
 
-import { galaxyData } from '../constans';
+import { galaxyData, galaxyOrbitSpeeds } from '../constans';
+import { useGalaxy } from '../Hooks/useGalaxy';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
 
 const GalaxyDetails: FC = () => {
   const location = useLocation();
   const { galaxyName } = useParams<{ galaxyName: string }>();
-  const { planetContainer, starsContainer, speed } = location.state;
-
+  const index = location.state?.index ?? 0;
   const galaxyDetails = galaxyData.find((galaxy) => galaxy.name === galaxyName);
 
   if (!galaxyDetails) {
@@ -27,7 +27,13 @@ const GalaxyDetails: FC = () => {
   }
 
   return (
-    <div className="relative w-screen h-screen grid grid-flow-row grid-rows-[auto_1fr_1fr]">
+    <div
+      className="
+        relative w-screen h-screen
+        grid grid-flow-row grid-rows-[auto_1fr_1fr]
+        overflow-y-auto overflow-x-hidden
+      "
+    >
       <div className="w-full pt-4 text-white text-center font-futurism">
         <Link to="/">
           <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold">
@@ -38,9 +44,8 @@ const GalaxyDetails: FC = () => {
       <div className="w-full h-[50vh]">
         <Canvas camera={{ position: [0, 0, 1] }}>
           <GalaxyScene
-            planetContainer={planetContainer}
-            starsContainer={starsContainer}
-            speed={speed}
+            starColor={galaxyDetails.color.colorRep}
+            speed={galaxyOrbitSpeeds[index]}
           />
         </Canvas>
       </div>
@@ -74,44 +79,40 @@ const GalaxyDetails: FC = () => {
 };
 
 const GalaxyScene: FC<{
-  planetContainer: THREE.Group;
-  starsContainer: THREE.Group;
+  starColor: number;
   speed: number;
-}> = ({ planetContainer, starsContainer, speed }) => {
-  const planetGroup = new THREE.Group();
-  planetGroup.position.set(0, 0, 0);
-  const starsGroup = new THREE.Group();
-  starsGroup.position.set(0, 0, 0);
-  const loader = new THREE.ObjectLoader();
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+}> = ({ speed, starColor }) => {
+  const position = { x: 0, y: 0, z: 0 };
+  const planetContainer = useRef<THREE.Group>(new THREE.Group());
+  const starsContainer = useRef<THREE.Group>(new THREE.Group());
+  planetContainer.current.position.set(0, 0, 0);
+  starsContainer.current.position.set(0, 0, 0);
 
-  loader.parse(planetContainer, (object) => {
-    planetGroup.add(object);
+  useGalaxy({
+    planetContainer,
+    starsContainer,
+    planets: Array.from({ length: 5 }),
+    starColor,
+    position,
+    scale: 2,
   });
-  loader.parse(starsContainer, (object) => {
-    starsGroup.add(object);
-  });
-
-  planetGroup.children[0].position.set(0, 0, 0);
-  starsGroup.children[0].position.set(0, 0, 0);
 
   useGalaxyRotation({
-    planetContainer: planetGroup,
-    starsContainer: starsGroup,
-    position: { x: 0, y: 0, z: 0 },
+    planetContainer,
+    starsContainer,
+    position,
     speed,
   });
 
   return (
-    <>
-      <group position={[0, 0, 0]} scale={2}>
-        <primitive object={planetGroup} />
+    <group position={[position.x, position.y, position.z]} scale={2}>
+      <group ref={planetContainer}>
+        <primitive object={planetContainer.current} />
       </group>
-      <group position={[0, 0, 0]} scale={2}>
-        <primitive object={starsGroup} />
+      <group ref={starsContainer}>
+        <primitive object={starsContainer.current} />
       </group>
-      <primitive object={ambientLight} />
-    </>
+    </group>
   );
 };
 
