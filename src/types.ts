@@ -3,6 +3,7 @@ export type Galaxy = {
   title: string;
   description: string;
   projects: (Star | Planet)[];
+  color: { colorRep: number };
 };
 
 export type Planet = {

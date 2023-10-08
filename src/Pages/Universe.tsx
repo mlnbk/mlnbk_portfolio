@@ -69,6 +69,7 @@ const Universe: FC = () => {
             planets={Array.from({ length: 5 })}
             radius={0.1}
             speed={galaxyOrbitSpeeds[index]}
+            starColor={galaxy.color.colorRep}
             isHovered={hoveredGalaxy === index}
             onHover={() => handleGalaxyHover(index)}
             onUnhover={() => handleGalaxyHover(null)}
