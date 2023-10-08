@@ -19,6 +19,7 @@ interface GalaxyProps {
   planets: (Star | Planet)[];
   radius?: number;
   speed?: number;
+  starColor: number;
   isHovered: boolean;
   onHover: () => void;
   onUnhover: () => void;
@@ -29,6 +30,7 @@ const Galaxy: FC<GalaxyProps> = ({
   position,
   radius = 1,
   speed = 1,
+  starColor,
   isHovered,
   onHover,
   onUnhover,
@@ -37,7 +39,7 @@ const Galaxy: FC<GalaxyProps> = ({
   const { size } = useThree();
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
   const starsContainer = useRef<THREE.Group>(new THREE.Group());
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 
   const generatePlanets = () => {
     planetContainer.current.clear();
@@ -78,10 +80,12 @@ const Galaxy: FC<GalaxyProps> = ({
     for (let i = 0; i < numOfStars; i++) {
       const starRadius = (0.95 + Math.random() * 0.95) * maxStarRadius;
       const starGeometry = new THREE.SphereGeometry(starRadius, 16, 16);
-      const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      const starMaterial = new THREE.MeshBasicMaterial({
+        color: starColor,
+      });
       const starMesh = new THREE.Mesh(starGeometry, starMaterial);
 
-      const radius = Math.random() * 0.1;
+      const radius = Math.random() * 0.15;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.random() * Math.PI - Math.PI / 2;
       starMesh.position.set(
@@ -98,6 +102,7 @@ const Galaxy: FC<GalaxyProps> = ({
       starsGroup.add(starMesh);
     }
     starsContainer.current.add(starsGroup);
+    starsContainer.current.add(ambientLight);
   };
 
   const handleGalaxyClick = () => {

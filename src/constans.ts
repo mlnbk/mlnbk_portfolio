@@ -42,10 +42,10 @@ export const planetPositions = [
 
 export const planetScreenFactor = 0.0005;
 
-export const maxPlanetRadius = 0.015;
-export const maxStarRadius = 0.0015;
+export const maxPlanetRadius = 0.02;
+export const maxStarRadius = 0.0011;
 
-export const numOfStars = 80;
+export const numOfStars = 500;
 
 export const galaxyData: Galaxy[] = [
   {
@@ -63,5 +63,8 @@ export const galaxyData: Galaxy[] = [
         description: 'Consectetur adipiscing elit.',
       },
     ],
+    color: {
+      colorRep: 0x38bef8,
+    },
   },
 ];

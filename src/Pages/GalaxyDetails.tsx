@@ -83,7 +83,7 @@ const GalaxyScene: FC<{
   const starsGroup = new THREE.Group();
   starsGroup.position.set(0, 0, 0);
   const loader = new THREE.ObjectLoader();
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 
   loader.parse(planetContainer, (object) => {
     planetGroup.add(object);

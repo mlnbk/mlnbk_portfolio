@@ -21,8 +21,8 @@ export const useGalaxyRotation = ({
       position.y,
       position.z,
     );
-    const rotationAxisStart = new THREE.Vector3(3, 3, 2);
-    const rotationAxisEnd = new THREE.Vector3(-3, -3, -2);
+    const rotationAxisStart = new THREE.Vector3(2, 4, 3);
+    const rotationAxisEnd = new THREE.Vector3(-2, -4, -3);
     const rotationMatrix = new THREE.Matrix4();
 
     if (planetContainer) {
