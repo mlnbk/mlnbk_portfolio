@@ -2,9 +2,10 @@ import { FC, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 import {
+  dynamicGalaxyPositions,
+  galaxyData,
   galaxyOrbitSpeeds,
   galaxyScreenFactor,
-  galaxyPositions as positions,
 } from '../constans';
 import Galaxy from '../Components/Galaxy';
 
@@ -18,6 +19,7 @@ const Universe: FC = () => {
   const updateGalaxyPositions = () => {
     const screenFactor =
       Math.min(window.innerWidth, window.innerHeight) * galaxyScreenFactor;
+    const positions = dynamicGalaxyPositions(galaxyData.length);
     setGalaxyPositions(
       positions.map((position) => ({
         x: position.x * screenFactor,
@@ -60,10 +62,10 @@ const Universe: FC = () => {
         </p>
       </div>
       <Canvas camera={{ position: [0, 0, 1] }}>
-        {galaxyPositions.map((position, index) => (
+        {galaxyData.map((galaxy, index) => (
           <Galaxy
             key={index}
-            position={position}
+            position={galaxyPositions[index]}
             planets={Array.from({ length: 5 })}
             radius={0.1}
             speed={galaxyOrbitSpeeds[index]}
