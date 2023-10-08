@@ -1,7 +1,7 @@
 import { FC, useRef, useEffect } from 'react';
 
 import * as THREE from 'three';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useThree } from '@react-three/fiber';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -11,6 +11,7 @@ import {
   planetPositions,
   planetScreenFactor,
 } from '../constans';
+import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
 
 interface GalaxyProps {
   position: { x: number; y: number; z: number };
@@ -100,7 +101,13 @@ const Galaxy: FC<GalaxyProps> = ({
 
   const handleGalaxyClick = () => {
     const galaxyId = 'statistics';
-    navigate(`/${galaxyId}`);
+    navigate(`/${galaxyId}`, {
+      state: {
+        planetContainer: planetContainer.current.toJSON(),
+        starsContainer: starsContainer.current.toJSON(),
+        speed,
+      },
+    });
   };
 
   useEffect(() => {
@@ -108,39 +115,11 @@ const Galaxy: FC<GalaxyProps> = ({
     generateStars();
   }, [size.height, size.width]);
 
-  useFrame(({ clock }) => {
-    const elapsedTime = clock.getElapsedTime();
-    const positionVector = new THREE.Vector3(
-      position.x,
-      position.y,
-      position.z,
-    );
-    const rotationAxisStart = new THREE.Vector3(3, 3, 2);
-    const rotationAxisEnd = new THREE.Vector3(-3, -3, -2);
-    const rotationMatrix = new THREE.Matrix4();
-
-    if (planetContainer.current) {
-      rotationMatrix.makeRotationAxis(
-        new THREE.Vector3()
-          .subVectors(rotationAxisEnd, rotationAxisStart)
-          .normalize(),
-        speed * elapsedTime,
-      );
-
-      planetContainer.current.setRotationFromMatrix(rotationMatrix);
-      planetContainer.current.position.copy(positionVector);
-    }
-    if (starsContainer.current) {
-      rotationMatrix.makeRotationAxis(
-        new THREE.Vector3()
-          .subVectors(rotationAxisEnd, rotationAxisStart)
-          .normalize(),
-        speed * elapsedTime,
-      );
-
-      starsContainer.current.setRotationFromMatrix(rotationMatrix);
-      starsContainer.current.position.copy(positionVector);
-    }
+  useGalaxyRotation({
+    planetContainer: planetContainer.current,
+    starsContainer: starsContainer.current,
+    position,
+    speed,
   });
 
   return (
