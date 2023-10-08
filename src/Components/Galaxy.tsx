@@ -1,24 +1,19 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC, useRef } from 'react';
 
 import * as THREE from 'three';
-import { useThree } from '@react-three/fiber';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  maxPlanetRadius,
-  maxStarRadius,
-  numOfStars,
-  planetPositions,
-  planetScreenFactor,
-} from '../constans';
 import { Planet, Star } from '../types';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
+import { useGalaxy } from '../Hooks/useGalaxy';
+import { useThree } from '@react-three/fiber';
 
 interface GalaxyProps {
   position: { x: number; y: number; z: number };
   planets: (Star | Planet)[];
   radius?: number;
   speed?: number;
+  index: number;
   starColor: number;
   isHovered: boolean;
   onHover: () => void;
@@ -30,100 +25,34 @@ const Galaxy: FC<GalaxyProps> = ({
   position,
   radius = 1,
   speed = 1,
+  index,
   starColor,
   isHovered,
   onHover,
   onUnhover,
 }) => {
-  const navigate = useNavigate();
   const { size } = useThree();
+  const navigate = useNavigate();
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
   const starsContainer = useRef<THREE.Group>(new THREE.Group());
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-
-  const generatePlanets = () => {
-    planetContainer.current.clear();
-    const planetGroup = new THREE.Object3D();
-
-    for (let i = 0; i < planets.length; i++) {
-      const planetColors = ['#FF5733', '#44D3A5', '#D144A5'];
-      const planetRadius = (0.95 + Math.random() * 0.95) * maxPlanetRadius;
-
-      const screenFactor =
-        Math.min(size.width, size.height) * planetScreenFactor;
-      const { x, y, z } = planetPositions[i];
-      const planetPosition = new THREE.Vector3(
-        x * screenFactor,
-        y * screenFactor,
-        z * screenFactor,
-      );
-
-      const planetGeometry = new THREE.SphereGeometry(planetRadius, 64, 64);
-      const planetMaterial = new THREE.MeshPhongMaterial({
-        color: planetColors[i],
-      });
-      const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
-
-      planetMesh.position.copy(planetPosition);
-      planetGroup.add(planetMesh);
-    }
-
-    planetContainer.current.add(planetGroup);
-    planetContainer.current.add(ambientLight);
-  };
-
-  const generateStars = () => {
-    starsContainer.current.clear();
-
-    const starsGroup = new THREE.Object3D();
-
-    for (let i = 0; i < numOfStars; i++) {
-      const starRadius = (0.95 + Math.random() * 0.95) * maxStarRadius;
-      const starGeometry = new THREE.SphereGeometry(starRadius, 16, 16);
-      const starMaterial = new THREE.MeshBasicMaterial({
-        color: starColor,
-      });
-      const starMesh = new THREE.Mesh(starGeometry, starMaterial);
-
-      const radius = Math.random() * 0.15;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.random() * Math.PI - Math.PI / 2;
-      starMesh.position.set(
-        radius * Math.cos(theta) * Math.cos(phi),
-        radius * Math.sin(phi),
-        radius * Math.sin(theta) * Math.cos(phi),
-      );
-      if (position.x <= 0) {
-        starMesh.rotateX(Math.PI / 3);
-      } else {
-        starMesh.rotateX(-Math.PI / 3);
-      }
-
-      starsGroup.add(starMesh);
-    }
-    starsContainer.current.add(starsGroup);
-    starsContainer.current.add(ambientLight);
-  };
 
   const handleGalaxyClick = () => {
     const galaxyId = 'statistics';
-    navigate(`/${galaxyId}`, {
-      state: {
-        planetContainer: planetContainer.current.toJSON(),
-        starsContainer: starsContainer.current.toJSON(),
-        speed,
-      },
-    });
+    navigate(`/${galaxyId}`, { state: { index } });
   };
 
-  useEffect(() => {
-    generatePlanets();
-    generateStars();
-  }, [size.height, size.width]);
+  useGalaxy({
+    planetContainer,
+    starsContainer,
+    planets,
+    starColor,
+    position,
+    scale: size.width < 768 ? 1.1 : 1,
+  });
 
   useGalaxyRotation({
-    planetContainer: planetContainer.current,
-    starsContainer: starsContainer.current,
+    planetContainer,
+    starsContainer,
     position,
     speed,
   });
