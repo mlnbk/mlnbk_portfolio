@@ -11,11 +11,12 @@ import {
   planetPositions,
   planetScreenFactor,
 } from '../constans';
+import { Planet, Star } from '../types';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
 
 interface GalaxyProps {
   position: { x: number; y: number; z: number };
-  planets: any; // TODO: array of projects
+  planets: (Star | Planet)[];
   radius?: number;
   speed?: number;
   isHovered: boolean;
