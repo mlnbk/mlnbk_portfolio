@@ -36,9 +36,10 @@ const Universe: FC = () => {
         {galaxyData.map((galaxy, index) => (
           <Galaxy
             key={index}
+            id={galaxy.name}
             index={index}
             position={galaxyPositions[index]}
-            planets={Array.from({ length: 5 })}
+            planets={galaxy.projects}
             radius={0.1}
             speed={galaxyOrbitSpeeds[index]}
             starColor={galaxy.color.colorRep}
