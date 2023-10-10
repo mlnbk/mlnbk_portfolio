@@ -7,6 +7,7 @@ import * as THREE from 'three';
 import { galaxyData, galaxyOrbitSpeeds } from '../constans';
 import { useGalaxy } from '../Hooks/useGalaxy';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
+import { Planet, Star } from '../types';
 
 const GalaxyDetails: FC = () => {
   const location = useLocation();
@@ -44,6 +45,7 @@ const GalaxyDetails: FC = () => {
       <div className="w-full h-[50vh]">
         <Canvas camera={{ position: [0, 0, 1] }}>
           <GalaxyScene
+            planets={galaxyDetails.projects}
             starColor={galaxyDetails.color.colorRep}
             speed={galaxyOrbitSpeeds[index]}
           />
@@ -79,9 +81,10 @@ const GalaxyDetails: FC = () => {
 };
 
 const GalaxyScene: FC<{
+  planets: (Star | Planet)[];
   starColor: number;
   speed: number;
-}> = ({ speed, starColor }) => {
+}> = ({ planets, speed, starColor }) => {
   const position = { x: 0, y: 0, z: 0 };
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
   const starsContainer = useRef<THREE.Group>(new THREE.Group());
@@ -91,7 +94,7 @@ const GalaxyScene: FC<{
   useGalaxy({
     planetContainer,
     starsContainer,
-    planets: Array.from({ length: 5 }),
+    planets,
     starColor,
     position,
     scale: 2,

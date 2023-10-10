@@ -1,14 +1,15 @@
 import { FC, useRef } from 'react';
 
 import * as THREE from 'three';
+import { useThree } from '@react-three/fiber';
 import { useNavigate } from 'react-router-dom';
 
 import { Planet, Star } from '../types';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
 import { useGalaxy } from '../Hooks/useGalaxy';
-import { useThree } from '@react-three/fiber';
 
 interface GalaxyProps {
+  id: string;
   position: { x: number; y: number; z: number };
   planets: (Star | Planet)[];
   radius?: number;
@@ -21,6 +22,7 @@ interface GalaxyProps {
 }
 
 const Galaxy: FC<GalaxyProps> = ({
+  id,
   planets,
   position,
   radius = 1,
@@ -37,8 +39,7 @@ const Galaxy: FC<GalaxyProps> = ({
   const starsContainer = useRef<THREE.Group>(new THREE.Group());
 
   const handleGalaxyClick = () => {
-    const galaxyId = 'statistics';
-    navigate(`/${galaxyId}`, { state: { index } });
+    navigate(`/${id}`, { state: { index } });
   };
 
   useGalaxy({
