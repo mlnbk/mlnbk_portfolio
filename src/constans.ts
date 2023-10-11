@@ -73,7 +73,7 @@ export const galaxyData: Galaxy[] = [
   },
   {
     name: 'lifestyle_travel',
-    title: 'Lifestyle / Travel',
+    title: 'Lifestyle',
     description: 'Projects related to lifestyle and traveling.',
     projects: [
       {
