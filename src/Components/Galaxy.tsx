@@ -1,6 +1,9 @@
 import { FC, useRef } from 'react';
 
 import * as THREE from 'three';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+
 import { useThree } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import { useNavigate } from 'react-router-dom';
@@ -68,11 +71,12 @@ const Galaxy: FC<GalaxyProps> = ({
           position={[position.x, position.y - 0.18, position.z]} // TODO make dependent on screen size
           rotation={camera.rotation}
           color="white"
-          fontSize={0.03}
+          fontSize={0.025}
           anchorX="center"
           anchorY="middle"
           scale={isHovered ? 1.5 : 1}
-          // TODO custom font
+          // fontWeight
+          font="/fonts/Futurism.otf"
         >
           {galaxyData.title}
         </Text>
