@@ -31,6 +31,8 @@ export const useGalaxy = ({
 }: UseGalaxyProperties) => {
   const { size } = useThree();
   const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  const textureLoader = new THREE.TextureLoader();
+  const customTexture = textureLoader.load('/textures/mars.jpeg');
 
   useEffect(() => {
     const generatePlanets = () => {
@@ -38,7 +40,6 @@ export const useGalaxy = ({
       const planetGroup = new THREE.Object3D();
 
       for (let i = 0; i < planets.length; i++) {
-        const planetColors = ['#FF5733', '#44D3A5', '#D144A5'];
         const planetRadius = (0.95 + Math.random() * 0.95) * maxPlanetRadius;
 
         const screenFactor =
@@ -51,9 +52,13 @@ export const useGalaxy = ({
         );
 
         const planetGeometry = new THREE.SphereGeometry(planetRadius, 64, 64);
+
         const planetMaterial = new THREE.MeshPhongMaterial({
-          color: planetColors[i],
+          map: customTexture,
         });
+
+        const overlayMesh = new THREE.Mesh(planetGeometry);
+        overlayMesh.position.copy(planetPosition);
         const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
 
         planetMesh.position.copy(planetPosition);
