@@ -30,7 +30,7 @@ export const dynamicGalaxyPositions = (arrayLength: number) => {
 
 export const galaxyOrbitSpeeds = [0.3, 0.25, 0.2, 0.3, 0.1];
 
-export const galaxyScreenFactor = 0.0015;
+export const galaxyScreenFactor = 0.0017;
 
 export const planetPositions = [
   { x: 0.0369, y: 0.1368, z: -0.2367 },
@@ -43,34 +43,11 @@ export const planetPositions = [
 export const planetScreenFactor = 0.0005;
 
 export const maxPlanetRadius = 0.02;
-export const maxStarRadius = 0.0011;
+export const maxStarRadius = 0.001;
 
-export const numOfStars = 500;
+export const numOfStars = 350;
 
 export const galaxyData: Galaxy[] = [
-  {
-    name: 'lifestyle_travel',
-    title: 'Lifestyle / Traveling',
-    description: 'Projects related to lifestyle and traveling.',
-    projects: [
-      {
-        title: 'getaway-plan-react-client',
-        description:
-          'A React-based frontend for the GetawayPlan app, which allows users to plan their trips easily.',
-      },
-      {
-        title: 'getaway-plan-api',
-        description:
-          'A Node.js-based API for the GetawayPlan app, which provides endpoints for user authentication, trip planning, and more.',
-      },
-      {
-        title: 'getaway-plan-infrastructure',
-        description:
-          'Infrastructure for the getaway-plan-react-client and getaway-plan-api applications.',
-      },
-    ],
-    color: { colorRep: 0x94a684 }, // green
-  },
   {
     name: 'machine_learning',
     title: 'Machine Learning',
@@ -93,6 +70,29 @@ export const galaxyData: Galaxy[] = [
       },
     ],
     color: { colorRep: 0xbeadfa }, // pastel purple
+  },
+  {
+    name: 'lifestyle_travel',
+    title: 'Lifestyle',
+    description: 'Projects related to lifestyle and traveling.',
+    projects: [
+      {
+        title: 'getaway-plan-react-client',
+        description:
+          'A React-based frontend for the GetawayPlan app, which allows users to plan their trips easily.',
+      },
+      {
+        title: 'getaway-plan-api',
+        description:
+          'A Node.js-based API for the GetawayPlan app, which provides endpoints for user authentication, trip planning, and more.',
+      },
+      {
+        title: 'getaway-plan-infrastructure',
+        description:
+          'Infrastructure for the getaway-plan-react-client and getaway-plan-api applications.',
+      },
+    ],
+    color: { colorRep: 0x94a684 }, // green
   },
   {
     name: 'data_analysis',
