@@ -1,17 +1,21 @@
 import { FC, useRef } from 'react';
 
 import * as THREE from 'three';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+
 import { useThree } from '@react-three/fiber';
+import { Text } from '@react-three/drei';
 import { useNavigate } from 'react-router-dom';
 
-import { Planet, Star } from '../types';
+import { Galaxy as GalaxyType } from '../types';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
 import { useGalaxy } from '../Hooks/useGalaxy';
 
 interface GalaxyProps {
   id: string;
   position: { x: number; y: number; z: number };
-  planets: (Star | Planet)[];
+  galaxyData: GalaxyType;
   radius?: number;
   speed?: number;
   index: number;
@@ -19,11 +23,12 @@ interface GalaxyProps {
   isHovered: boolean;
   onHover: () => void;
   onUnhover: () => void;
+  showTitle?: boolean;
 }
 
 const Galaxy: FC<GalaxyProps> = ({
   id,
-  planets,
+  galaxyData,
   position,
   radius = 1,
   speed = 1,
@@ -32,8 +37,9 @@ const Galaxy: FC<GalaxyProps> = ({
   isHovered,
   onHover,
   onUnhover,
+  showTitle = true,
 }) => {
-  const { size } = useThree();
+  const { camera, size } = useThree();
   const navigate = useNavigate();
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
   const starsContainer = useRef<THREE.Group>(new THREE.Group());
@@ -45,7 +51,7 @@ const Galaxy: FC<GalaxyProps> = ({
   useGalaxy({
     planetContainer,
     starsContainer,
-    planets,
+    planets: galaxyData.projects,
     starColor,
     position,
     scale: size.width < 768 ? 1.1 : 1,
@@ -60,6 +66,21 @@ const Galaxy: FC<GalaxyProps> = ({
 
   return (
     <>
+      {showTitle && (
+        <Text
+          position={[position.x, position.y - 0.18, position.z]} // TODO make dependent on screen size
+          rotation={camera.rotation}
+          color="white"
+          fontSize={0.025}
+          anchorX="center"
+          anchorY="middle"
+          scale={isHovered ? 1.5 : 1}
+          // fontWeight
+          font="/fonts/Futurism.otf"
+        >
+          {galaxyData.title}
+        </Text>
+      )}
       <mesh
         onClick={handleGalaxyClick}
         onPointerOver={onHover}

@@ -25,21 +25,21 @@ const Universe: FC = () => {
           showText ? 'translate-y-4 opacity-100' : 'translate-y-1/2 opacity-0'
         } text-white text-center transition-all duration-3000 ease-in-out font-futurism`}
       >
-        <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold">
+        <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold">
           Cosmic Odyssey
         </h1>
         <p className="text-md md:text-lg lg:text-xl xl:text-2xl mt-4">
           Journey Through My Interests and Projects
         </p>
       </div>
-      <Canvas camera={{ position: [0, 0, 1] }}>
+      <Canvas id="galaxy-canvas" camera={{ position: [0, 0, 1] }}>
         {galaxyData.map((galaxy, index) => (
           <Galaxy
             key={index}
             id={galaxy.name}
             index={index}
             position={galaxyPositions[index]}
-            planets={galaxy.projects}
+            galaxyData={galaxy}
             radius={0.1}
             speed={galaxyOrbitSpeeds[index]}
             starColor={galaxy.color.colorRep}
