@@ -17,12 +17,17 @@ const GalaxyDetails: FC = () => {
 
   if (!galaxyDetails) {
     return (
-      <div className="w-full pt-4 text-white text-center font-futurism">
-        <Link to="/">
-          <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold">
-            Cosmic Odyssey
-          </h1>
-        </Link>
+      <div className="relative w-screen h-screen font-futurism text-white grid grid-flow-row grid-rows-[auto_1fr]">
+        <div className="w-full pt-4 text-center">
+          <Link to="/">
+            <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold">
+              Cosmic Odyssey
+            </h1>
+          </Link>
+        </div>
+        <div className="flex justify-center items-center">
+          404 | Galaxy not found
+        </div>
       </div>
     );
   }
@@ -68,7 +73,7 @@ const GalaxyDetails: FC = () => {
           {galaxyDetails.projects.map((project, index) => (
             <div
               key={index}
-              className="py-2 hover:shadow-lg transition duration-300"
+              className="py-4 hover:shadow-lg transition duration-300"
             >
               <h3 className="text-xl font-semibold">{project.title}</h3>
               <p className="text-gray-500 mt-2">{project.description}</p>
@@ -109,6 +114,7 @@ const GalaxyScene: FC<{
 
   return (
     <group position={[position.x, position.y, position.z]} scale={2}>
+      <ambientLight color={0xffffff} intensity={1} />
       <group ref={planetContainer}>
         <primitive object={planetContainer.current} />
       </group>
