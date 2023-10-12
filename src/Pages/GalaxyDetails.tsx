@@ -114,6 +114,7 @@ const GalaxyScene: FC<{
 
   return (
     <group position={[position.x, position.y, position.z]} scale={2}>
+      <ambientLight color={0xffffff} intensity={1} />
       <group ref={planetContainer}>
         <primitive object={planetContainer.current} />
       </group>
