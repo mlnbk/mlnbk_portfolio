@@ -1,7 +1,6 @@
-// customHooks/useGalaxyGeneration.js
-import { useThree } from '@react-three/fiber';
 import { useEffect, MutableRefObject } from 'react';
 import * as THREE from 'three';
+import { useThree } from '@react-three/fiber';
 
 import {
   maxPlanetRadius,
@@ -66,7 +65,6 @@ export const useGalaxy = ({
       }
 
       planetContainer.current.add(planetGroup);
-      planetContainer.current.add(ambientLight);
     };
 
     const generateStars = () => {

@@ -33,6 +33,7 @@ const Universe: FC = () => {
         </p>
       </div>
       <Canvas id="galaxy-canvas" camera={{ position: [0, 0, 1] }}>
+        <ambientLight color={0xffffff} intensity={1} />
         {galaxyData.map((galaxy, index) => (
           <Galaxy
             key={index}
