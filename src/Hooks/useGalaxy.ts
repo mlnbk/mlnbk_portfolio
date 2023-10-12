@@ -29,9 +29,8 @@ export const useGalaxy = ({
   scale = 1,
 }: UseGalaxyProperties) => {
   const { size } = useThree();
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
   const textureLoader = new THREE.TextureLoader();
-  const customTexture = textureLoader.load('/textures/mars.jpeg');
+  const customTexture = textureLoader.load('/textures/moon.jpeg');
 
   useEffect(() => {
     const generatePlanets = () => {
@@ -54,6 +53,8 @@ export const useGalaxy = ({
 
         const planetMaterial = new THREE.MeshPhongMaterial({
           map: customTexture,
+          emissive: starColor,
+          emissiveIntensity: 0.07,
         });
 
         const overlayMesh = new THREE.Mesh(planetGeometry);
