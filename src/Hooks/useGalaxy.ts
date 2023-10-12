@@ -1,7 +1,6 @@
-// customHooks/useGalaxyGeneration.js
-import { useThree } from '@react-three/fiber';
 import { useEffect, MutableRefObject } from 'react';
 import * as THREE from 'three';
+import { useThree } from '@react-three/fiber';
 
 import {
   maxPlanetRadius,
@@ -30,7 +29,8 @@ export const useGalaxy = ({
   scale = 1,
 }: UseGalaxyProperties) => {
   const { size } = useThree();
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  const textureLoader = new THREE.TextureLoader();
+  const customTexture = textureLoader.load('/textures/moon.jpeg');
 
   useEffect(() => {
     const generatePlanets = () => {
@@ -38,7 +38,6 @@ export const useGalaxy = ({
       const planetGroup = new THREE.Object3D();
 
       for (let i = 0; i < planets.length; i++) {
-        const planetColors = ['#FF5733', '#44D3A5', '#D144A5'];
         const planetRadius = (0.95 + Math.random() * 0.95) * maxPlanetRadius;
 
         const screenFactor =
@@ -51,17 +50,22 @@ export const useGalaxy = ({
         );
 
         const planetGeometry = new THREE.SphereGeometry(planetRadius, 64, 64);
-        const planetMaterial = new THREE.MeshPhongMaterial({
-          color: planetColors[i],
-        });
-        const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
 
+        const planetMaterial = new THREE.MeshPhongMaterial({
+          map: customTexture,
+          emissive: starColor,
+          emissiveIntensity: 0.07,
+        });
+
+        const overlayMesh = new THREE.Mesh(planetGeometry);
+        overlayMesh.position.copy(planetPosition);
+        const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
         planetMesh.position.copy(planetPosition);
+
         planetGroup.add(planetMesh);
       }
 
       planetContainer.current.add(planetGroup);
-      planetContainer.current.add(ambientLight);
     };
 
     const generateStars = () => {
@@ -96,7 +100,6 @@ export const useGalaxy = ({
         starsGroup.add(starMesh);
       }
       starsContainer.current.add(starsGroup);
-      starsContainer.current.add(ambientLight);
     };
 
     generatePlanets();
