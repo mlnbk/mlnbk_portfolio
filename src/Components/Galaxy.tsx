@@ -1,8 +1,6 @@
 import { FC, useRef } from 'react';
 
 import * as THREE from 'three';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 import { useThree } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
@@ -75,7 +73,7 @@ const Galaxy: FC<GalaxyProps> = ({
           anchorX="center"
           anchorY="middle"
           scale={isHovered ? 1.5 : 1}
-          // fontWeight
+          // TODO fontWeight
           font="/fonts/Futurism.otf"
         >
           {galaxyData.title}
