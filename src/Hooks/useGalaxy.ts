@@ -60,8 +60,8 @@ export const useGalaxy = ({
         const overlayMesh = new THREE.Mesh(planetGeometry);
         overlayMesh.position.copy(planetPosition);
         const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
-
         planetMesh.position.copy(planetPosition);
+
         planetGroup.add(planetMesh);
       }
 
@@ -101,7 +101,6 @@ export const useGalaxy = ({
         starsGroup.add(starMesh);
       }
       starsContainer.current.add(starsGroup);
-      starsContainer.current.add(ambientLight);
     };
 
     generatePlanets();
