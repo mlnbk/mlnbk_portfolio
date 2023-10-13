@@ -9,9 +9,15 @@ export type Galaxy = {
 export type Planet = {
   title: string;
   description: string;
+  links: {
+    github: string;
+  };
 };
 
 export type Star = {
   title: string;
   description: string;
+  links: {
+    github: string;
+  };
 };
