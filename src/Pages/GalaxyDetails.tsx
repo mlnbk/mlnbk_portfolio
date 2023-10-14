@@ -1,8 +1,9 @@
-import { Canvas } from '@react-three/fiber';
 import { FC, useRef } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { Link, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import * as THREE from 'three';
+import { BsChevronLeft } from 'react-icons/bs';
 
 import { galaxyData, galaxyOrbitSpeeds } from '../constans';
 import { useGalaxy } from '../Hooks/useGalaxy';
@@ -65,19 +66,30 @@ const GalaxyDetails: FC = () => {
           text-left text-gray-100
         "
       >
-        <h2 className="text-2xl font-semibold mb-4">{galaxyDetails.title}</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-2xl font-semibold">{galaxyDetails.title}</h2>
+          <Link to="/">
+            <BsChevronLeft size={20} />
+          </Link>
+        </div>{' '}
         <p className="text-lg text-gray-400 mb-8">
           {galaxyDetails.description}
         </p>
         <div className="grid grid-flow-row divide-y">
           {galaxyDetails.projects.map((project, index) => (
-            <div
-              key={index}
-              className="py-4 hover:shadow-lg transition duration-300"
+            <Link
+              to={project.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-              <p className="text-gray-500 mt-2">{project.description}</p>
-            </div>
+              <div
+                key={index}
+                className="py-4 px-2 hover:bg-gray-800 rounded-lg transition duration-100"
+              >
+                <h3 className="text-xl font-semibold">{project.title}</h3>
+                <p className="text-gray-500 mt-2">{project.description}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
