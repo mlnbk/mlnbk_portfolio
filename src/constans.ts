@@ -90,7 +90,7 @@ export const galaxyData: Galaxy[] = [
         description:
           'A React-based frontend for the GetawayPlan app, which allows users to plan their trips easily.',
         links: {
-          github: 'https://github.com/mlnbk/react',
+          github: 'https://github.com/mlnbk/getaway-plan-react-client',
         },
       },
       {
@@ -98,7 +98,7 @@ export const galaxyData: Galaxy[] = [
         description:
           'A Node.js-based API for the GetawayPlan app, which provides endpoints for user authentication, trip planning, and more.',
         links: {
-          github: 'https://github.com/mlnbk/plan',
+          github: 'https://github.com/mlnbk/getaway-plan-api',
         },
       },
       {
