@@ -38,10 +38,10 @@ export const useGalaxy = ({
       const planetGroup = new THREE.Object3D();
 
       for (let i = 0; i < planets.length; i++) {
-        const planetRadius = (0.95 + Math.random() * 0.95) * maxPlanetRadius;
-
         const screenFactor =
           Math.min(size.width, size.height) * planetScreenFactor * scale;
+        const planetRadius =
+          (0.95 + Math.random() * 0.95) * maxPlanetRadius * screenFactor * 2.25;
         const { x, y, z } = planetPositions[i];
         const planetPosition = new THREE.Vector3(
           x * screenFactor,
@@ -83,7 +83,7 @@ export const useGalaxy = ({
 
         const screenFactor =
           Math.min(size.width, size.height) * planetScreenFactor;
-        const radius = Math.random() * screenFactor * scale * 0.4;
+        const radius = Math.random() * screenFactor * scale * 0.5;
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.random() * Math.PI - Math.PI / 2;
         starMesh.position.set(
