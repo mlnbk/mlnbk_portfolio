@@ -21,7 +21,7 @@ const Universe: FC = () => {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
+    <div className="relative w-[100dvw] h-[100dvh] overflow-hidden">
       <div
         className={`absolute transform h-full w-full ${
           showText ? 'translate-y-4 opacity-100' : 'translate-y-1/2 opacity-0'
