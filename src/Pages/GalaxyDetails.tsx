@@ -18,7 +18,7 @@ const GalaxyDetails: FC = () => {
 
   if (!galaxyDetails) {
     return (
-      <div className="relative w-screen h-screen font-futurism text-white grid grid-flow-row grid-rows-[auto_1fr]">
+      <div className="relative w-[100dvw] h-[100dvh] font-futurism text-white grid grid-flow-row grid-rows-[auto_1fr]">
         <div className="w-full pt-4 text-center">
           <Link to="/">
             <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold">
@@ -36,7 +36,7 @@ const GalaxyDetails: FC = () => {
   return (
     <div
       className="
-        relative w-screen h-screen
+        relative w-[100dvw] h-[100dvh]
         grid grid-flow-row grid-rows-[auto_1fr_1fr]
         overflow-y-auto overflow-x-hidden
       "
