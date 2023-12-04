@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { BsGithub } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 import { galaxyData, galaxyOrbitSpeeds } from '../constans';
 import Galaxy from '../Components/Galaxy';
@@ -50,6 +52,26 @@ const Universe: FC = () => {
           />
         ))}
       </Canvas>
+      <footer className="absolute bottom-0 left-0 w-full text-sm text-gray-500 text-center p-4">
+        <p>
+          © 2023
+          {' | '}
+          <a
+            href="https://github.com/mlnbk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            mlnbk
+          </a>
+        </p>
+        <div className="flex items-center justify-center">
+          This project is available on
+          <Link to="https://github.com/mlnbk/mlnbk_portfolio">
+            <BsGithub size={20} className="ml-2" />
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 };
