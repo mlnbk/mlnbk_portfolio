@@ -4,17 +4,25 @@ import { Link, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import * as THREE from 'three';
 import { BsChevronLeft } from 'react-icons/bs';
+import { isChrome } from 'react-device-detect';
 
 import { galaxyData, galaxyOrbitSpeeds } from '../constans';
 import { useGalaxy } from '../Hooks/useGalaxy';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
 import { Planet, Star } from '../types';
 
+// See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
+const getUnit = () =>
+  isChrome
+    ? { width: 'w-screen', height: 'h-screen' }
+    : { width: 'w-[100dvw]', height: 'h-[100dvh]' };
+
 const GalaxyDetails: FC = () => {
   const location = useLocation();
   const { galaxyName } = useParams<{ galaxyName: string }>();
   const index = location.state?.index ?? 0;
   const galaxyDetails = galaxyData.find((galaxy) => galaxy.name === galaxyName);
+  const { width, height } = getUnit();
 
   if (!galaxyDetails) {
     return (
@@ -35,11 +43,11 @@ const GalaxyDetails: FC = () => {
 
   return (
     <div
-      className="
-        relative w-[100dvw] h-[100dvh]
+      className={`
+        relative ${width} ${height} 
         grid grid-flow-row grid-rows-[auto_1fr_1fr]
         overflow-y-auto overflow-x-hidden
-      "
+      `}
     >
       <div className="w-full pt-4 text-white text-center font-futurism">
         <Link to="/">
