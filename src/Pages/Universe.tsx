@@ -2,14 +2,13 @@ import { FC, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { BsGithub } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { isChrome } from 'react-device-detect';
 
 import { galaxyData, galaxyOrbitSpeeds } from '../constans';
 import Galaxy from '../Components/Galaxy';
 import { useGalaxyPositions } from '../Hooks/useGalaxyPositions';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
-const isChrome =
-  /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 const getUnit = () =>
   isChrome ? { unitX: 'vw', unitY: 'vh' } : { unitX: 'dvw', unitY: 'dvh' };
 
