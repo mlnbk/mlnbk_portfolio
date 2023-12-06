@@ -49,7 +49,7 @@ export const numOfStars = 350;
 
 export const galaxyData: Galaxy[] = [
   {
-    name: 'machine_learning',
+    name: 'machine-learning',
     title: 'Machine Learning',
     description: 'Projects related to machine learning and data science.',
     projects: [
@@ -81,7 +81,7 @@ export const galaxyData: Galaxy[] = [
     color: { colorRep: 0xbeadfa }, // pastel purple
   },
   {
-    name: 'lifestyle_travel',
+    name: 'lifestyle-travel',
     title: 'Lifestyle',
     description: 'Projects related to lifestyle and traveling.',
     projects: [
@@ -113,7 +113,7 @@ export const galaxyData: Galaxy[] = [
     color: { colorRep: 0x94a684 }, // green
   },
   {
-    name: 'data_analysis',
+    name: 'data-analysis',
     title: 'Data Analysis',
     description: 'Projects related to data analysis and data science.',
     projects: [
@@ -145,7 +145,7 @@ export const galaxyData: Galaxy[] = [
     color: { colorRep: 0xea907a }, // pastel orange/red
   },
   {
-    name: 'mobile_apps',
+    name: 'mobile-apps',
     title: 'Mobile Apps',
     description: 'Mobile app projects developed using Flutter & Dart.',
     projects: [
