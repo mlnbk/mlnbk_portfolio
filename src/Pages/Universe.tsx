@@ -10,13 +10,15 @@ import { useGalaxyPositions } from '../Hooks/useGalaxyPositions';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
 const getUnit = () =>
-  isChrome ? { unitX: 'vw', unitY: 'vh' } : { unitX: 'dvw', unitY: 'dvh' };
+  isChrome
+    ? { width: 'w-screen', height: 'h-screen' }
+    : { width: 'w-[100dvw]', height: 'h-[100dvh]' };
 
 const Universe: FC = () => {
   const [hoveredGalaxy, setHoveredGalaxy] = useState<number | null>(null);
   const [showText, setShowText] = useState(false);
   const galaxyPositions = useGalaxyPositions();
-  const { unitX, unitY } = getUnit();
+  const { width, height } = getUnit();
 
   const handleGalaxyHover = (index: number | null) => {
     setHoveredGalaxy(index);
@@ -27,7 +29,7 @@ const Universe: FC = () => {
   }, []);
 
   return (
-    <div className={`relative w-[100${unitX}] h-[100${unitY}] overflow-hidden`}>
+    <div className={`relative ${width} ${height} overflow-hidden`}>
       <div
         className={`absolute transform h-full w-full ${
           showText ? 'translate-y-4 opacity-100' : 'translate-y-1/2 opacity-0'
