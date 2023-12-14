@@ -1,6 +1,6 @@
 # Personal Portfolio - A Cosmic Code Showcase 🚀🌌🌟
 
-Welcome to my coding universe-themed portfolio, powered by React. This project showcases my software engineering journey and the projects I've created across various galaxies of interest.
+Welcome to my coding universe-themed portfolio, powered by React. The project showcases my software engineering journey and the projects I've created across various galaxies of interest.
 
 ## Available Scripts
 
