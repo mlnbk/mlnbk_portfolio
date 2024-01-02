@@ -7,7 +7,7 @@ module.exports = {
         3000: '3000ms',
       },
       fontFamily: {
-        futurism: ['Futurism', 'serif'],
+        voyager: ['Voyager', 'serif'],
       },
     },
   },
