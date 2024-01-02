@@ -74,7 +74,7 @@ const Galaxy: FC<GalaxyProps> = ({
           anchorY="middle"
           scale={isHovered ? 1.5 : 1}
           // TODO fontWeight
-          font="/fonts/Futurism.otf"
+          font="/fonts/Voyager.otf"
         >
           {galaxyData.title}
         </Text>
