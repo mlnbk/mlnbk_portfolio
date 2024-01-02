@@ -33,7 +33,7 @@ const Universe: FC = () => {
       <div
         className={`absolute transform h-full w-full ${
           showText ? 'translate-y-4 opacity-100' : 'translate-y-1/2 opacity-0'
-        } text-white text-center transition-all duration-3000 ease-in-out font-futurism`}
+        } text-white text-center transition-all duration-3000 ease-in-out font-voyager`}
       >
         <h1 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold">
           Cosmic Odyssey
