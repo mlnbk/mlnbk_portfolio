@@ -1,8 +1,23 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+# Prevent committing to main branch
+CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
+if [ "$CURRENT_BRANCH" == "main" ]; then
+  echo "You are not allowed to commit directly to the main branch. Please create a feature branch and make a pull request."
+  exit 1
+fi 
+
+# API checks
+cd api
+npx lint-staged 
 npx tsc --noEmit
+
+# Front-end checks
+cd ../web
+npx lint-staged
+npx tsc --noEmit --noUnusedLocals  
+npm test -- --only-changed --watchAll=false
 
 RETURN=$?
 

@@ -52,7 +52,7 @@ const Galaxy: FC<GalaxyProps> = ({
     planets: galaxyData.projects,
     starColor,
     position,
-    scale: size.width < 768 ? 1.1 : 1,
+    scale: size.width < 640 ? 1.2 : size.width < 768 ? 1.1 : 1,
   });
 
   useGalaxyRotation({
