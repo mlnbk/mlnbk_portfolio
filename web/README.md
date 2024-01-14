@@ -1,6 +1,6 @@
-# Personal Portfolio - A Cosmic Code Showcase 🚀🌌🌟
+# Frontend - Cosmic Code Showcase 🚀🌌🌟
 
-Welcome to my coding universe-themed portfolio, powered by React. The project showcases my software engineering journey and the projects I've created across various galaxies of interest.
+This is the frontend of the Cosmic Code Showcase portfolio, built with React and Tailwind CSS.
 
 ## Available Scripts
 
