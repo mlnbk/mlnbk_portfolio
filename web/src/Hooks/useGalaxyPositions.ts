@@ -10,13 +10,14 @@ type GalaxyPosition = { x: number; y: number; z: number };
 
 export const useGalaxyPositions = () => {
   const [galaxyPositions, setGalaxyPositions] = useState<GalaxyPosition[]>([]);
+  const widthFactor = window.innerWidth < 1024 ? 0.9 : 0.6;
 
   const updateGalaxyPositions = () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const screenFactor = Math.min(width, height) * galaxyScreenFactor;
-    const screenFactorX = width * galaxyScreenFactor;
-    const screenFactorY = height * 0.7 * galaxyScreenFactor;
+    const screenFactorX = width * widthFactor * galaxyScreenFactor;
+    const screenFactorY = height * 0.6 * galaxyScreenFactor;
 
     const positions = dynamicGalaxyPositions(galaxyData.length);
     setGalaxyPositions(
