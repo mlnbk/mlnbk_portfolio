@@ -32,7 +32,7 @@
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.+(ts|tsx)\"",
     "lint": "eslint \"src/**/*.+(ts|tsx)\" --fix",
-    "prepare": "husky install"
+    "prepare": "cd .. && husky install"
   },
   "browserslist": {
     "production": [
