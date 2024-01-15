@@ -1,12 +1,16 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import {
+  GithubActivityResponse,
+  GithubActivityService,
+} from 'nestjs-github-activity';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly githubService: GithubActivityService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('/github-activities')
+  async getGitHubActivities(): Promise<GithubActivityResponse> {
+    const activities = await this.githubService.fetchGithubActivities();
+    return activities;
   }
 }
