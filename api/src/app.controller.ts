@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+
 import {
   GithubActivityResponse,
   GithubActivityService,
@@ -11,6 +12,9 @@ export class AppController {
   @Get('/github-activities')
   async getGitHubActivities(): Promise<GithubActivityResponse> {
     const activities = await this.githubService.fetchGithubActivities();
+    if (!activities) {
+      throw new Error('Unable to fetch Github activities');
+    }
     return activities;
   }
 }
