@@ -47,6 +47,7 @@ export const maxStarRadius = 0.001;
 
 export const numOfStars = 350;
 
+// FIXME: fetch data from Github API
 export const galaxyData: Galaxy[] = [
   {
     name: 'machine-learning',
