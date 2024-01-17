@@ -79,7 +79,7 @@ const GalaxyDetails: FC = () => {
           <Link to="/">
             <BsChevronLeft size={20} />
           </Link>
-        </div>{' '}
+        </div>
         <p className="text-lg text-gray-400 mb-8">
           {galaxyDetails.description}
         </p>
