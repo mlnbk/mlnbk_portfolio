@@ -14,7 +14,6 @@ export const useGithubActivity = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        console.log(`${process.env.REACT_APP_API_BASE_URL}/github-activities`);
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/github-activities`,
         );
@@ -25,7 +24,8 @@ export const useGithubActivity = () => {
         setData(
           data.map((activity) => ({
             created_at: activity.created_at,
-            repoName: activity.repo.name,
+            repoName: activity.repo.name.split('/')[1],
+            repoUrl: activity.repo.url,
             ...getGithubActivityDetails(activity.type, activity.payload.action),
           })),
         );
