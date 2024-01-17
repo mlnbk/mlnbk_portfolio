@@ -103,7 +103,15 @@ const Universe: FC = () => {
                     </p>
                   </div>
                   <p className="text-gray-500 mt-2 first-letter:uppercase">
-                    {activity.description} in the {activity.repoName}{' '}
+                    {activity.description} the{' '}
+                    <a
+                      href={activity.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline"
+                    >
+                      {activity.repoName}
+                    </a>{' '}
                     repository.
                   </p>
                 </div>

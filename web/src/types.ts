@@ -55,6 +55,7 @@ export type Action = 'opened' | 'closed';
 export type DisplayedActivity = {
   created_at: string;
   repoName: string;
+  repoUrl: string;
   title: string;
   description: string;
   emoji: string;
