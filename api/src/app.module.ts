@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CacheModule, CacheInterceptor } from '@nestjs/cache-manager';
 
 import { GithubActivityModule } from 'nestjs-github-activity';
 
@@ -8,6 +10,7 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
+    CacheModule.register({ ttl: 10 * 60 * 1000 }), // 10 minutes
     ConfigModule.forRoot({ isGlobal: true }),
     GithubActivityModule.forRootAsync({
       imports: [ConfigModule],
@@ -21,6 +24,12 @@ import { AppService } from './app.service';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
+    },
+  ],
 })
 export class AppModule {}
