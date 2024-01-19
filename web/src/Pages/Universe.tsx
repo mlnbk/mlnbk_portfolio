@@ -21,7 +21,7 @@ const Universe: FC = () => {
   const [showText, setShowText] = useState(false);
   const galaxyPositions = useGalaxyPositions();
   const { width, height } = getUnit();
-  const { data, isLoading, error } = useGithubActivity();
+  const { data, isLoading, error } = useGithubActivity(3);
 
   const handleGalaxyHover = (index: number | null) => {
     setHoveredGalaxy(index);
