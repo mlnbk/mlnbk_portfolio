@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 
 import { galaxyData, galaxyOrbitSpeeds } from '../constans';
 import Galaxy from '../Components/Galaxy';
+import LimitDropdown from '../Components/LimitDropdown';
 import { useGalaxyPositions } from '../Hooks/useGalaxyPositions';
 import { useGithubActivity } from '../Hooks/useGithubActivities';
 
@@ -17,11 +18,12 @@ const getUnit = () =>
     : { width: 'w-[100dvw]', height: 'h-[100dvh]' };
 
 const Universe: FC = () => {
+  const [limit, setLimit] = useState(20);
   const [hoveredGalaxy, setHoveredGalaxy] = useState<number | null>(null);
   const [showText, setShowText] = useState(false);
   const galaxyPositions = useGalaxyPositions();
   const { width, height } = getUnit();
-  const { data, isLoading, error } = useGithubActivity();
+  const { data, isLoading, error } = useGithubActivity(limit);
 
   const handleGalaxyHover = (index: number | null) => {
     setHoveredGalaxy(index);
@@ -76,6 +78,11 @@ const Universe: FC = () => {
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-semibold">Cosmic Activities</h2>
+          <LimitDropdown
+            selectedLimit={limit}
+            limits={[10, 20, 50, 100]}
+            onChange={(newLimit) => setLimit(newLimit)}
+          />
         </div>
         <p className="text-lg text-gray-400 mb-8">
           Witness how the universe unfolds its wonders with amazing events

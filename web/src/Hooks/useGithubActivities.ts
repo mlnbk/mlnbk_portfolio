@@ -5,7 +5,7 @@ import {
   GithubActivityResponse,
 } from '../types';
 
-export const useGithubActivity = () => {
+export const useGithubActivity = (limit = 20) => {
   const [data, setData] = useState<DisplayedActivity[] | undefined>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error>();
@@ -15,7 +15,7 @@ export const useGithubActivity = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/github-activities`,
+          `${process.env.REACT_APP_API_BASE_URL}/github-activities?limit=${limit}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -37,7 +37,7 @@ export const useGithubActivity = () => {
     };
 
     fetchData();
-  }, []);
+  }, [limit]);
 
   return { data, isLoading, error };
 };
