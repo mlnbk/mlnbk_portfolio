@@ -1,15 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { BsGithub } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 import { isChrome } from 'react-device-detect';
-import dayjs from 'dayjs';
 
 import { galaxyData, galaxyOrbitSpeeds } from '../constans';
-import Galaxy from '../Components/Galaxy';
-import LimitDropdown from '../Components/LimitDropdown';
 import { useGalaxyPositions } from '../Hooks/useGalaxyPositions';
 import { useGithubActivity } from '../Hooks/useGithubActivities';
+
+import ActivityList from '../Components/ActivityList';
+import Footer from '../Components/Footer';
+import Galaxy from '../Components/Galaxy';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
 const getUnit = () =>
@@ -67,86 +66,15 @@ const Universe: FC = () => {
           ))}
         </Canvas>
       </div>
-      <div
-        className="
-          sm:max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]
-          mx-auto px-4 pt-4 md:px-6 md:pt-6 lg:px-8 lg:pt-8 xl:px-10 xl:pt-10
-          rounded-t-lg
-          bg-gray-900
-          text-left text-gray-100
-        "
+      <ActivityList
+        limit={limit}
+        setLimit={setLimit}
+        isLoading={isLoading}
+        error={error}
+        data={data}
       >
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold">Cosmic Activities</h2>
-          <LimitDropdown
-            selectedLimit={limit}
-            limits={[10, 20, 50, 100]}
-            onChange={(newLimit) => setLimit(newLimit)}
-          />
-        </div>
-        <p className="text-lg text-gray-400 mb-8">
-          Witness how the universe unfolds its wonders with amazing events
-          happening regularly.
-        </p>
-        {isLoading ? (
-          <div className="flex justify-center items-center text-gray-500">
-            Loading...
-          </div>
-        ) : error ? (
-          <div className="flex justify-center items-center text-gray-500">
-            Error: {String(error)}
-          </div>
-        ) : (
-          <div className="grid grid-flow-row divide-y">
-            {data?.map((activity, index) => (
-              <div>
-                <div key={index} className="py-4 px-2 rounded-lg">
-                  <div className="flex justify-between text-center">
-                    <h3 className="text-xl font-semibold capitalize">
-                      {activity.emoji} {activity.title}
-                    </h3>
-                    <p className="text-sm text-gray-500">
-                      {dayjs(activity.created_at).format('DD MMM YYYY, HH[h]')}
-                    </p>
-                  </div>
-                  <p className="text-gray-500 mt-2 first-letter:uppercase">
-                    {activity.description} the{' '}
-                    <a
-                      href={activity.repoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline"
-                    >
-                      {activity.repoName}
-                    </a>{' '}
-                    repository.
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-        <footer className="bottom-0 left-0 w-full text-sm text-gray-500 text-center p-4 pt-6">
-          <p>
-            2024
-            {' | '}
-            <a
-              href="https://github.com/mlnbk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-            >
-              mlnbk
-            </a>
-          </p>
-          <div className="flex items-center justify-center">
-            This project is available on
-            <Link to="https://github.com/mlnbk/mlnbk_portfolio">
-              <BsGithub size={20} className="ml-2" />
-            </Link>
-          </div>
-        </footer>
-      </div>
+        <Footer />
+      </ActivityList>
     </div>
   );
 };
