@@ -56,11 +56,11 @@ const ActivityList: FC<ActivityListProps> = ({
           {data?.map((activity, index) => (
             <div>
               <div key={index} className="py-4 px-2 rounded-lg">
-                <div className="flex justify-between text-center">
-                  <h3 className="text-xl font-semibold capitalize">
+                <div className="flex justify-between">
+                  <h3 className="text-lg font-semibold capitalize text-left">
                     {activity.emoji} {activity.title}
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 text-right self-center">
                     {dayjs(activity.created_at).format('DD MMM YYYY, HH[h]')}
                   </p>
                 </div>
