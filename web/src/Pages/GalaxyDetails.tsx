@@ -81,8 +81,12 @@ const GalaxyDetails: FC = () => {
               key={index}
               className="py-4 hover:bg-gray-800 rounded-lg transition duration-100"
             >
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-              <p className="text-gray-500 mt-2">{project.description}</p>
+              <h3 className="text-base md:text-lg lg:text-xl font-semibold">
+                {project.title}
+              </h3>
+              <p className="text-sm md:text-base text-gray-500 mt-2">
+                {project.description}
+              </p>
             </div>
           </Link>
         ))}
