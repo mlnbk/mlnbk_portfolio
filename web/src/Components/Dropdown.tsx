@@ -1,21 +1,17 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
-interface LimitDropdownProps {
-  selectedLimit: number;
-  limits: number[];
-  onChange: (limit: number) => void;
+interface DropdownProps {
+  selected: number;
+  options: number[];
+  onChange: (newValue: number) => void;
 }
 
-const LimitDropdown: FC<LimitDropdownProps> = ({
-  selectedLimit,
-  limits,
-  onChange,
-}) => {
+const Dropdown: FC<DropdownProps> = ({ selected, options, onChange }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const handleLimitChange = (limit: number) => {
-    onChange(limit);
+  const handleChange = (newValue: number) => {
+    onChange(newValue);
     setIsOpen(false);
   };
 
@@ -43,7 +39,7 @@ const LimitDropdown: FC<LimitDropdownProps> = ({
           cursor-pointer z-50
         "
       >
-        {selectedLimit}
+        {selected}
         {isOpen ? <BsChevronUp /> : <BsChevronDown />}
       </button>
       {isOpen && (
@@ -55,17 +51,15 @@ const LimitDropdown: FC<LimitDropdownProps> = ({
           cursor-pointer z-50
           "
         >
-          {limits.map((limit) => (
+          {options.map((option) => (
             <li
-              key={limit}
-              onClick={() => handleLimitChange(limit)}
+              key={option}
+              onClick={() => handleChange(option)}
               className={`
               rounded-md px-2 py-1
-              ${
-                selectedLimit === limit ? 'bg-indigo-500' : 'hover:bg-gray-600'
-              }`}
+              ${selected === option ? 'bg-indigo-500' : 'hover:bg-gray-600'}`}
             >
-              {limit}
+              {option}
             </li>
           ))}
         </ul>
@@ -74,4 +68,4 @@ const LimitDropdown: FC<LimitDropdownProps> = ({
   );
 };
 
-export default LimitDropdown;
+export default Dropdown;
