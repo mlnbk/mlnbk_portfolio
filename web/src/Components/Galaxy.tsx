@@ -1,7 +1,5 @@
-import { FC, useRef } from 'react';
-
+import { FC, useRef, useState } from 'react';
 import * as THREE from 'three';
-
 import { useThree } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import { useNavigate } from 'react-router-dom';
@@ -14,33 +12,24 @@ interface GalaxyProps {
   id: string;
   position: { x: number; y: number; z: number };
   galaxyData: GalaxyType;
-  radius?: number;
-  speed?: number;
+  speed: number;
   index: number;
   starColor: number;
-  isHovered: boolean;
-  onHover: () => void;
-  onUnhover: () => void;
-  showTitle?: boolean;
 }
 
 const Galaxy: FC<GalaxyProps> = ({
   id,
   galaxyData,
   position,
-  radius = 1,
-  speed = 1,
+  speed,
   index,
   starColor,
-  isHovered,
-  onHover,
-  onUnhover,
-  showTitle = true,
 }) => {
   const { camera, size } = useThree();
   const navigate = useNavigate();
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
   const starsContainer = useRef<THREE.Group>(new THREE.Group());
+  const [isHovered, setIsHovered] = useState<boolean>();
 
   const handleGalaxyClick = () => {
     navigate(`/${id}`, { state: { index } });
@@ -64,28 +53,33 @@ const Galaxy: FC<GalaxyProps> = ({
 
   return (
     <>
-      {showTitle && (
-        <Text
-          position={[position.x, position.y - 0.18, position.z]} // TODO make dependent on screen size
-          rotation={camera.rotation}
-          color="white"
-          fontSize={0.025}
-          anchorX="center"
-          anchorY="middle"
-          scale={isHovered ? 1.5 : 1}
-          // TODO fontWeight
-          font="/fonts/Voyager.otf"
-        >
-          {galaxyData.title}
-        </Text>
-      )}
+      <Text
+        position={[position.x, position.y - 0.18, position.z]} // TODO make dependent on screen size
+        rotation={camera.rotation}
+        color="white"
+        fontSize={0.025}
+        anchorX="center"
+        anchorY="middle"
+        scale={isHovered ? 1.5 : 1}
+        // TODO fontWeight
+        font="/fonts/Voyager.otf"
+      >
+        {galaxyData.title}
+      </Text>
+      {/* NOTE: controlls hover behavior */}
       <mesh
         onClick={handleGalaxyClick}
-        onPointerOver={onHover}
-        onPointerOut={onUnhover}
+        onPointerOver={() => {
+          setIsHovered(true);
+          document.body.style.cursor = 'pointer';
+        }}
+        onPointerOut={() => {
+          setIsHovered(false);
+          document.body.style.cursor = 'auto';
+        }}
         position={[position.x, position.y, position.z]}
       >
-        <planeGeometry args={[3 * radius, 3 * radius]} />
+        <planeGeometry args={[0.3, 0.3]} />
         <meshBasicMaterial transparent opacity={0} />
       </mesh>
       <group
