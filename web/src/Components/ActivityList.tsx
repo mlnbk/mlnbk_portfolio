@@ -1,26 +1,18 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import dayjs from 'dayjs';
 
-import { DisplayedActivity } from '../types';
-import LimitDropdown from './LimitDropdown';
+import Dropdown from './Dropdown';
+import { useGithubActivity } from '../Hooks/useGithubActivities';
 
 interface ActivityListProps {
-  limit: number;
-  setLimit: (limit: number) => void;
-  isLoading: boolean;
-  error: any;
-  data?: DisplayedActivity[];
   children: ReactNode;
 }
 
-const ActivityList: FC<ActivityListProps> = ({
-  limit,
-  setLimit,
-  isLoading,
-  error,
-  data,
-  children,
-}) => {
+const ActivityList: FC<ActivityListProps> = ({ children }) => {
+  const dropdownOptions = [10, 20, 50, 100];
+  const [limit, setLimit] = useState(20);
+  const { data, isLoading, error } = useGithubActivity(limit);
+
   return (
     <div
       className="
@@ -33,9 +25,9 @@ const ActivityList: FC<ActivityListProps> = ({
     >
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-semibold">Cosmic Activities</h2>
-        <LimitDropdown
-          selectedLimit={limit}
-          limits={[10, 20, 50, 100]}
+        <Dropdown
+          selected={limit}
+          options={dropdownOptions}
           onChange={(newLimit) => setLimit(newLimit)}
         />
       </div>
