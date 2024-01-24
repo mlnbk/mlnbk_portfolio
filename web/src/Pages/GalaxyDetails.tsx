@@ -7,9 +7,12 @@ import { BsChevronLeft } from 'react-icons/bs';
 import { isChrome } from 'react-device-detect';
 
 import { galaxyData, galaxyOrbitSpeeds } from '../constans';
+import { Planet, Star } from '../types';
 import { useGalaxy } from '../Hooks/useGalaxy';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
-import { Planet, Star } from '../types';
+
+import List from '../Components/List';
+import InfoTitle from '../Components/InfoTitle';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
 const getUnit = () =>
@@ -49,13 +52,7 @@ const GalaxyDetails: FC = () => {
         overflow-y-auto overflow-x-hidden
       `}
     >
-      <div className="w-full pt-4 text-white text-center font-voyager">
-        <Link to="/">
-          <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold">
-            Cosmic Odyssey
-          </h1>
-        </Link>
-      </div>
+      <InfoTitle title={galaxyDetails.title} details={['Projects']} />
       <div className="w-full h-[50vh]">
         <Canvas camera={{ position: [0, 0, 1] }}>
           <GalaxyScene
@@ -65,42 +62,35 @@ const GalaxyDetails: FC = () => {
           />
         </Canvas>
       </div>
-      <div
-        className="
-          sm:max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]
-          mx-auto p-4 md:p-6 lg:p-8 xl:p-10
-          rounded-t-lg
-          bg-gray-900
-          text-left text-gray-100
-        "
-      >
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold">{galaxyDetails.title}</h2>
+      <List
+        title={galaxyDetails.title}
+        description={galaxyDetails.description}
+        rightElement={
           <Link to="/">
             <BsChevronLeft size={20} />
           </Link>
-        </div>
-        <p className="text-lg text-gray-400 mb-8">
-          {galaxyDetails.description}
-        </p>
-        <div className="grid grid-flow-row divide-y">
-          {galaxyDetails.projects.map((project, index) => (
-            <Link
-              to={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
+        }
+      >
+        {galaxyDetails.projects.map((project, index) => (
+          <Link
+            to={project.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div
+              key={index}
+              className="py-4 hover:bg-gray-800 rounded-lg transition duration-100"
             >
-              <div
-                key={index}
-                className="py-4 px-2 hover:bg-gray-800 rounded-lg transition duration-100"
-              >
-                <h3 className="text-xl font-semibold">{project.title}</h3>
-                <p className="text-gray-500 mt-2">{project.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+              <h3 className="text-base md:text-lg lg:text-xl font-semibold">
+                {project.title}
+              </h3>
+              <p className="text-sm md:text-base text-gray-500 mt-2">
+                {project.description}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </List>
     </div>
   );
 };
