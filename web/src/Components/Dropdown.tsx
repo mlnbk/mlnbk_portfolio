@@ -37,6 +37,7 @@ const Dropdown: FC<DropdownProps> = ({ selected, options, onChange }) => {
           border border-gray-300 rounded-md
           focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
           cursor-pointer z-50
+          text-sm md:text-base
         "
       >
         {selected}
@@ -57,6 +58,7 @@ const Dropdown: FC<DropdownProps> = ({ selected, options, onChange }) => {
               onClick={() => handleChange(option)}
               className={`
               rounded-md px-2 py-1
+              text-sm md:text-base
               ${selected === option ? 'bg-indigo-500' : 'hover:bg-gray-600'}`}
             >
               {option}
