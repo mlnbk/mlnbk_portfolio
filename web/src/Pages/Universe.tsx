@@ -12,6 +12,7 @@ import Galaxy from '../Components/Galaxy';
 import InfoTitle from '../Components/InfoTitle';
 import GithubActivityListElement from '../Components/GithubActivityListElement';
 import Dropdown from '../Components/Dropdown';
+import HighlightedProjects from '../Components/HighlightedProjects';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
 const getUnit = () =>
@@ -25,6 +26,26 @@ const Universe: FC = () => {
   const dropdownOptions = [10, 20, 50, 100];
   const [limit, setLimit] = useState(20);
   const { data, isLoading, error } = useGithubActivity(limit);
+
+  // FIXME dummy, replace with actual projects
+  const projects = [
+    {
+      name: 'Project 1',
+      link: 'https://github.com/mlnbk',
+      technologies: ['React', 'TypeScript', 'TailwindCSS'],
+    },
+    {
+      name: 'Project 2',
+      link: 'github.com/mlnbk',
+
+      technologies: ['React', 'TypeScript', 'TailwindCSS'],
+    },
+    {
+      name: 'Project 3',
+      link: 'github.com/mlnbk',
+      technologies: ['React', 'TypeScript', 'TailwindCSS'],
+    },
+  ];
 
   return (
     <div className={`relative ${width} ${height} overflow-x-hidden`}>
@@ -45,25 +66,35 @@ const Universe: FC = () => {
           ))}
         </Canvas>
       </div>
-      <List
-        isLoading={isLoading}
-        error={error}
-        title="Cosmic Activities"
-        description="Witness how the universe unfolds its wonders with amazing events
-        happening regularly."
-        rightElement={
-          <Dropdown
-            selected={limit}
-            options={dropdownOptions}
-            onChange={setLimit}
-          />
-        }
+      <div
+        className="
+          sm:max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]
+          mx-auto
+          grid gap-16
+          mt-14
+        "
       >
-        {data?.map((activity, index) => (
-          <GithubActivityListElement activity={activity} index={index} />
-        ))}
-        <Footer />
-      </List>
+        <HighlightedProjects projects={projects} />
+        <List
+          isLoading={isLoading}
+          error={error}
+          title="Cosmic Activities"
+          description="Witness how the universe unfolds its wonders with amazing events
+        happening regularly."
+          rightElement={
+            <Dropdown
+              selected={limit}
+              options={dropdownOptions}
+              onChange={setLimit}
+            />
+          }
+        >
+          {data?.map((activity, index) => (
+            <GithubActivityListElement activity={activity} index={index} />
+          ))}
+          <Footer />
+        </List>
+      </div>
     </div>
   );
 };
