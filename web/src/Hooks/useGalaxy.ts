@@ -9,12 +9,11 @@ import {
   planetPositions,
   planetScreenFactor,
 } from '../constans';
-import { Planet, Star } from '../types';
 
 interface UseGalaxyProperties {
   planetContainer: MutableRefObject<THREE.Group>;
   starsContainer: MutableRefObject<THREE.Group>;
-  planets: (Star | Planet)[];
+  planets: string[];
   starColor: number;
   position: { x: number; y: number; z: number };
   scale?: number;

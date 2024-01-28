@@ -28,8 +28,9 @@ const InfoTitle: FC<InfoTitleProps> = ({ details, title }) => {
         />
       )}
       {details &&
-        details.map((detail) => (
+        details.map((detail, index) => (
           <TypeAnimation
+            key={index}
             wrapper={'p'}
             className="text-sm lg:text-lg xl:text-xl"
             cursor={false}
