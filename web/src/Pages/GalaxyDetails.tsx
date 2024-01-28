@@ -6,7 +6,11 @@ import * as THREE from 'three';
 import { BsChevronLeft } from 'react-icons/bs';
 import { isChrome } from 'react-device-detect';
 
-import { galaxyData, galaxyOrbitSpeeds } from '../constans';
+import {
+  galaxyData,
+  galaxyOrbitSpeeds,
+  highlightedProjects,
+} from '../constans';
 import { useGalaxy } from '../Hooks/useGalaxy';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
 
@@ -27,7 +31,7 @@ const GalaxyDetails: FC = () => {
   const index = location.state?.index ?? 0;
   const galaxyDetails = galaxyData.find((galaxy) => galaxy.name === galaxyName);
   const { width, height } = getUnit();
-  const { projects, loading } = useGithubProjects(
+  const { projects, isLoading, error } = useGithubProjects(
     galaxyDetails?.projects ?? [],
   );
 
@@ -68,41 +72,55 @@ const GalaxyDetails: FC = () => {
       </div>
       <div
         className="
-          sm:max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]
-          mx-auto
-          grid gap-16
-          mt-14
+        sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%]
+        mx-auto
+        grid gap-16
+        mt-14
         "
       >
-        <HighlightedProjects projects={[]} />
-        <List
-          title={galaxyDetails.title}
-          description={galaxyDetails.description}
-          rightElement={
-            <Link to="/">
-              <BsChevronLeft size={20} />
-            </Link>
-          }
-        >
-          {loading ? (
-            <div className="flex justify-center items-center text-gray-500">
-              Loading...
-            </div>
-          ) : !projects || projects.length === 0 ? (
-            <div className="flex justify-center items-center text-gray-500">
-              Failed to fetch projects.
-            </div>
-          ) : (
-            projects.map((project, index) => (
+        <HighlightedProjects
+          projects={highlightedProjects[galaxyDetails.name]}
+        />
+        {isLoading ? (
+          <div
+            className="
+              flex justify-center justify-self-center items-center
+              text-gray-500 bg-gray-900 
+              w-max h-min p-4 
+              rounded-lg
+            "
+          >
+            Loading projects...
+          </div>
+        ) : error || !projects || projects.length === 0 ? (
+          <div
+            className="
+              flex justify-center justify-self-center items-center
+              text-gray-500 bg-gray-900 
+              w-max h-min p-4 
+              rounded-lg
+            "
+          >
+            Failed to fetch projects. Please try again later.
+          </div>
+        ) : (
+          <List
+            title={galaxyDetails.title}
+            description={galaxyDetails.description}
+            rightElement={
+              <Link to="/">
+                <BsChevronLeft size={20} />
+              </Link>
+            }
+          >
+            {projects.map((project, index) => (
               <Link
+                key={index}
                 to={project.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div
-                  key={index}
-                  className="py-4 hover:bg-gray-800 rounded-lg transition duration-100"
-                >
+                <div className="py-4 hover:bg-gray-800 rounded-lg transition duration-100">
                   <h3 className="text-base md:text-lg lg:text-xl font-semibold">
                     {project.name}
                   </h3>
@@ -111,9 +129,9 @@ const GalaxyDetails: FC = () => {
                   </p>
                 </div>
               </Link>
-            ))
-          )}
-        </List>
+            ))}
+          </List>
+        )}
       </div>
     </div>
   );

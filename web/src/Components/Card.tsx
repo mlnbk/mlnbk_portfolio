@@ -1,12 +1,8 @@
 import { FC } from 'react';
 
-interface CardProps {
-  name: string;
-  link: string;
-  technologies: string[];
-}
+import { HighlightedProject } from '../types';
 
-const Card: FC<CardProps> = ({ name, link, technologies }) => {
+const Card: FC<HighlightedProject> = ({ name, link, technologies }) => {
   return (
     <a href={link} target="_blank" rel="noopener noreferrer">
       <div
@@ -26,7 +22,7 @@ const Card: FC<CardProps> = ({ name, link, technologies }) => {
         "
       >
         <div className="flex flex-col justify-center h-full">
-          <div className="text-2xl md:text-3xl lg:text-4xl font-bold justify-center">
+          <div className="text-xl md:text-2xl font-bold justify-center">
             {name}
           </div>
         </div>

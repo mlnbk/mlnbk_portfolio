@@ -1,14 +1,9 @@
 import { FC } from 'react';
 import Card from './Card';
-
-type Project = {
-  name: string;
-  link: string;
-  technologies: string[];
-};
+import { HighlightedProject } from '../types';
 
 type HighlightedProjectsProps = {
-  projects: Project[];
+  projects: HighlightedProject[];
 };
 
 const HighlightedProjects: FC<HighlightedProjectsProps> = ({ projects }) => {
@@ -26,6 +21,22 @@ const HighlightedProjects: FC<HighlightedProjectsProps> = ({ projects }) => {
             technologies={project.technologies}
           />
         ))}
+        {projects.length % 2 !== 0 && (
+          <div
+            className="
+              p-4 md:p-6 lg:p-8
+              rounded-lg shadow-lg
+              text-white text-left
+              w-full min-h-[10rem] md:min-h-[12rem] lg:min-h-[14rem]
+              flex flex-col
+              justify-center
+              text-xs 2xl:text-base font-medium
+              block md:hidden
+            "
+          >
+            And many more to find under the specific galaxies...
+          </div>
+        )}
       </div>
     </div>
   );

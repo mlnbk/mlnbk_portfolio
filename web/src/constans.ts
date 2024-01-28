@@ -1,4 +1,4 @@
-import { Galaxy } from './types';
+import { Galaxy, HighlightedProject } from './types';
 
 export const dynamicGalaxyPositions = (arrayLength: number) => {
   const positions = [];
@@ -49,33 +49,23 @@ export const numOfStars = 350;
 
 export const galaxyData: Galaxy[] = [
   {
-    name: 'machine-learning',
-    title: 'Machine Learning',
-    description: 'Projects related to machine learning and data science.',
+    name: 'ml-data-science',
+    title: 'ML & Data Science',
+    description: 'Projects related to data data science and machine learning.',
     projects: ['bulldozer_price', 'heart_disease', 'neural_networks'],
-    color: { colorRep: 0xbeadfa }, // pastel purple
+    color: { colorRep: 0xea907a }, // pastel orange/red
   },
   {
     name: 'lifestyle-travel',
     title: 'Lifestyle',
     description: 'Projects related to lifestyle and traveling.',
     projects: [
+      'mlnbk_portfolio',
       'getaway-plan-react-client',
       'getaway-plan-api',
       'getaway-plan-infrastructure',
     ],
     color: { colorRep: 0x94a684 }, // green
-  },
-  {
-    name: 'data-analysis',
-    title: 'Data Analysis',
-    description: 'Projects related to data analysis and data science.',
-    projects: [
-      'numpy_exercise',
-      'matplotlib_exercise',
-      'scikit_learn_exercise',
-    ],
-    color: { colorRep: 0xea907a }, // pastel orange/red
   },
   {
     name: 'mobile-apps',
@@ -91,3 +81,50 @@ export const galaxyData: Galaxy[] = [
     color: { colorRep: 0x6096b4 }, // pastel blue
   },
 ];
+
+export const landingHighlightProjects: HighlightedProject[] = [
+  {
+    name: 'Portfolio Project',
+    link: 'https://github.com/mlnbk/mlnbk_portfolio',
+    technologies: ['React', 'Three.js', 'TypeScript'],
+  },
+  {
+    name: 'Farming Data Analysis',
+    link: 'https://github.com/balazs-szabo99/mlnbk_portfolio',
+    technologies: ['React', 'Chart.js', 'Python'],
+  },
+  {
+    name: 'Chat App',
+    link: 'https://github.com/mlnbk/chat_app',
+    technologies: ['Flutter', 'Dart', 'Firebase'],
+  },
+];
+
+export const highlightedProjects: { [key: string]: HighlightedProject[] } = {
+  'ml-data-science': [
+    {
+      name: 'Farming Data Analysis',
+      link: 'https://github.com/balazs-szabo99/farming-climate-change',
+      technologies: ['React', 'Chart.js', 'Python'],
+    },
+    {
+      name: 'Bulldozer Price',
+      link: 'https://github.com/mlnbk/bulldozer_price',
+      technologies: ['Regression', 'SKLearn', 'Pandas'],
+    },
+    {
+      name: 'Heart Disease',
+      link: 'https://github.com/mlnbk/heart_disease',
+      technologies: ['Classification', 'SKLearn', 'Pandas'],
+    },
+  ],
+  'lifestyle-travel': [landingHighlightProjects[0]],
+  'mobile-apps': [
+    landingHighlightProjects[2],
+    {
+      name: 'Favourite Places',
+      link: 'https://github.com/mlnbk/favorite_places',
+      technologies: ['Flutter', 'Google Maps', 'SQLite'],
+    },
+  ],
+};
