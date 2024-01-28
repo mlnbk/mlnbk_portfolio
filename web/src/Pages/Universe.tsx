@@ -2,7 +2,11 @@ import { FC, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { isChrome } from 'react-device-detect';
 
-import { galaxyData, galaxyOrbitSpeeds } from '../constans';
+import {
+  galaxyData,
+  galaxyOrbitSpeeds,
+  landingHighlightProjects as highlightedProjects,
+} from '../constans';
 import { useGalaxyPositions } from '../Hooks/useGalaxyPositions';
 import { useGithubActivity } from '../Hooks/useGithubActivities';
 
@@ -12,6 +16,7 @@ import Galaxy from '../Components/Galaxy';
 import InfoTitle from '../Components/InfoTitle';
 import GithubActivityListElement from '../Components/GithubActivityListElement';
 import Dropdown from '../Components/Dropdown';
+import HighlightedProjects from '../Components/HighlightedProjects';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
 const getUnit = () =>
@@ -45,25 +50,35 @@ const Universe: FC = () => {
           ))}
         </Canvas>
       </div>
-      <List
-        isLoading={isLoading}
-        error={error}
-        title="Cosmic Activities"
-        description="Witness how the universe unfolds its wonders with amazing events
-        happening regularly."
-        rightElement={
-          <Dropdown
-            selected={limit}
-            options={dropdownOptions}
-            onChange={setLimit}
-          />
-        }
+      <div
+        className="
+          sm:max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]
+          mx-auto
+          grid gap-16
+          mt-14
+        "
       >
-        {data?.map((activity, index) => (
-          <GithubActivityListElement activity={activity} index={index} />
-        ))}
-        <Footer />
-      </List>
+        <HighlightedProjects projects={highlightedProjects} />
+        <List
+          isLoading={isLoading}
+          error={error}
+          title="Cosmic Activities"
+          description="Witness how the universe unfolds its wonders with amazing events
+        happening regularly."
+          rightElement={
+            <Dropdown
+              selected={limit}
+              options={dropdownOptions}
+              onChange={setLimit}
+            />
+          }
+        >
+          {data?.map((activity, index) => (
+            <GithubActivityListElement activity={activity} index={index} />
+          ))}
+          <Footer />
+        </List>
+      </div>
     </div>
   );
 };

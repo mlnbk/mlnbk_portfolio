@@ -1,4 +1,4 @@
-import { Galaxy } from './types';
+import { Galaxy, HighlightedProject } from './types';
 
 export const dynamicGalaxyPositions = (arrayLength: number) => {
   const positions = [];
@@ -47,150 +47,84 @@ export const maxStarRadius = 0.001;
 
 export const numOfStars = 350;
 
-// FIXME: fetch data from Github API
 export const galaxyData: Galaxy[] = [
   {
-    name: 'machine-learning',
-    title: 'Machine Learning',
-    description: 'Projects related to machine learning and data science.',
-    projects: [
-      {
-        title: 'bulldozer_price',
-        description:
-          "Bulldozer price supervised learning time series data project based on the Complete Machine Learning & Data Science Bootcamp Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/bulldozer_price',
-        },
-      },
-      {
-        title: 'heart_disease',
-        description:
-          "Heart disease supervised learning classification project based on the Complete Machine Learning & Data Science Bootcamp Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/heart_disease',
-        },
-      },
-      {
-        title: 'neural_networks',
-        description:
-          "Neural networks (deep learning, transfer learning, TensorFlow 2) practice project based on the Complete Machine Learning & Data Science Bootcamp Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/neural_networks',
-        },
-      },
-    ],
-    color: { colorRep: 0xbeadfa }, // pastel purple
+    name: 'ml-data-science',
+    title: 'ML & Data Science',
+    description: 'Projects related to data data science and machine learning.',
+    projects: ['bulldozer_price', 'heart_disease', 'neural_networks'],
+    color: { colorRep: 0xea907a }, // pastel orange/red
   },
   {
     name: 'lifestyle-travel',
     title: 'Lifestyle',
     description: 'Projects related to lifestyle and traveling.',
     projects: [
-      {
-        title: 'getaway-plan-react-client',
-        description:
-          'A React-based frontend for the GetawayPlan app, which allows users to plan their trips easily.',
-        links: {
-          github: 'https://github.com/mlnbk/getaway-plan-react-client',
-        },
-      },
-      {
-        title: 'getaway-plan-api',
-        description:
-          'A Node.js-based API for the GetawayPlan app, which provides endpoints for user authentication, trip planning, and more.',
-        links: {
-          github: 'https://github.com/mlnbk/getaway-plan-api',
-        },
-      },
-      {
-        title: 'getaway-plan-infrastructure',
-        description:
-          'Infrastructure for the getaway-plan-react-client and getaway-plan-api applications.',
-        links: {
-          github: 'https://github.com/mlnbk/getaway-plan-infrastructure',
-        },
-      },
+      'mlnbk_portfolio',
+      'getaway-plan-react-client',
+      'getaway-plan-api',
+      'getaway-plan-infrastructure',
     ],
     color: { colorRep: 0x94a684 }, // green
-  },
-  {
-    name: 'data-analysis',
-    title: 'Data Analysis',
-    description: 'Projects related to data analysis and data science.',
-    projects: [
-      {
-        title: 'numpy_exercise',
-        description:
-          "Numpy exercise project based on the Complete Machine Learning & Data Science Bootcamp Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/numpy_exercise',
-        },
-      },
-      {
-        title: 'matplotlib_exercise',
-        description:
-          "Matplotlib exercise project based on the Complete Machine Learning & Data Science Bootcamp Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/matplotlib_exercise',
-        },
-      },
-      {
-        title: 'scikit_learn_exercise',
-        description:
-          "Scikit-Learn exercise project based on the Complete Machine Learning & Data Science Bootcamp Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/scikit_learn_exercise',
-        },
-      },
-    ],
-    color: { colorRep: 0xea907a }, // pastel orange/red
   },
   {
     name: 'mobile-apps',
     title: 'Mobile Apps',
     description: 'Mobile app projects developed using Flutter & Dart.',
     projects: [
-      {
-        title: 'chat_app',
-        description:
-          "Chat app based on the Flutter & Dart - The Complete Guide Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/chat_app',
-        },
-      },
-      {
-        title: 'favorite_places',
-        description:
-          "Favorite Places app based on the Flutter & Dart - The Complete Guide Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/favorite_places',
-        },
-      },
-      {
-        title: 'shopping_list',
-        description:
-          "Shopping list app based on the Flutter & Dart - The Complete Guide Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/shopping_list',
-        },
-      },
-      {
-        title: 'meals_app',
-        description:
-          "Meals app based on the Flutter & Dart - The Complete Guide Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/meals_app',
-        },
-      },
-      {
-        title: 'expense_tracker',
-        description:
-          "Expense Tracker project based on the Flutter & Dart - The Complete Guide Udemy course's related section.",
-        links: {
-          github: 'https://github.com/mlnbk/expense_tracker',
-        },
-      },
+      'chat_app',
+      'favorite_places',
+      'shopping_list',
+      'meals_app',
+      'expense_tracker',
     ],
     color: { colorRep: 0x6096b4 }, // pastel blue
   },
 ];
+
+export const landingHighlightProjects: HighlightedProject[] = [
+  {
+    name: 'Portfolio Project',
+    link: 'https://github.com/mlnbk/mlnbk_portfolio',
+    technologies: ['React', 'Three.js', 'TypeScript'],
+  },
+  {
+    name: 'Farming Data Analysis',
+    link: 'https://github.com/balazs-szabo99/farming-climate-change',
+    technologies: ['React', 'Chart.js', 'Python'],
+  },
+  {
+    name: 'Chat App',
+    link: 'https://github.com/mlnbk/chat_app',
+    technologies: ['Flutter', 'Dart', 'Firebase'],
+  },
+];
+
+export const highlightedProjects: { [key: string]: HighlightedProject[] } = {
+  'ml-data-science': [
+    {
+      name: 'Farming Data Analysis',
+      link: 'https://github.com/balazs-szabo99/farming-climate-change',
+      technologies: ['React', 'Chart.js', 'Python'],
+    },
+    {
+      name: 'Bulldozer Price',
+      link: 'https://github.com/mlnbk/bulldozer_price',
+      technologies: ['Regression', 'SKLearn', 'Pandas'],
+    },
+    {
+      name: 'Heart Disease',
+      link: 'https://github.com/mlnbk/heart_disease',
+      technologies: ['Classification', 'SKLearn', 'Pandas'],
+    },
+  ],
+  'lifestyle-travel': [landingHighlightProjects[0]],
+  'mobile-apps': [
+    landingHighlightProjects[2],
+    {
+      name: 'Favourite Places',
+      link: 'https://github.com/mlnbk/favorite_places',
+      technologies: ['Flutter', 'Google Maps', 'SQLite'],
+    },
+  ],
+};

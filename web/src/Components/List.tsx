@@ -20,8 +20,7 @@ const List: FC<ListProps> = ({
   return (
     <div
       className="
-          sm:max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]
-          mx-auto px-4 pt-4 md:px-6 md:pt-6 lg:px-8 lg:pt-8 xl:px-10 xl:pt-10
+          px-4 pt-4 md:px-6 md:pt-6 lg:px-8 lg:pt-8 xl:px-10 xl:pt-10
           rounded-t-lg
           bg-gray-900
           text-left text-gray-100
