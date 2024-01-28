@@ -2,7 +2,11 @@ import { FC, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { isChrome } from 'react-device-detect';
 
-import { galaxyData, galaxyOrbitSpeeds } from '../constans';
+import {
+  galaxyData,
+  galaxyOrbitSpeeds,
+  landingHighlightProjects as highlightedProjects,
+} from '../constans';
 import { useGalaxyPositions } from '../Hooks/useGalaxyPositions';
 import { useGithubActivity } from '../Hooks/useGithubActivities';
 
@@ -26,26 +30,6 @@ const Universe: FC = () => {
   const dropdownOptions = [10, 20, 50, 100];
   const [limit, setLimit] = useState(20);
   const { data, isLoading, error } = useGithubActivity(limit);
-
-  // FIXME dummy, replace with actual projects
-  const projects = [
-    {
-      name: 'Project 1',
-      link: 'https://github.com/mlnbk',
-      technologies: ['React', 'TypeScript', 'TailwindCSS'],
-    },
-    {
-      name: 'Project 2',
-      link: 'github.com/mlnbk',
-
-      technologies: ['React', 'TypeScript', 'TailwindCSS'],
-    },
-    {
-      name: 'Project 3',
-      link: 'github.com/mlnbk',
-      technologies: ['React', 'TypeScript', 'TailwindCSS'],
-    },
-  ];
 
   return (
     <div className={`relative ${width} ${height} overflow-x-hidden`}>
@@ -74,7 +58,7 @@ const Universe: FC = () => {
           mt-14
         "
       >
-        <HighlightedProjects projects={projects} />
+        <HighlightedProjects projects={highlightedProjects} />
         <List
           isLoading={isLoading}
           error={error}

@@ -4,7 +4,8 @@ import { GithubProject } from '../types';
 
 const useGithubProjects = (projectNames: string[]) => {
   const [projects, setProjects] = useState<GithubProject[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error>();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -30,17 +31,17 @@ const useGithubProjects = (projectNames: string[]) => {
             description: d.description,
           })),
         );
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        setError(error.message);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchProjects();
   }, [projectNames]);
 
-  return { projects, loading };
+  return { projects, isLoading, error };
 };
 
 export default useGithubProjects;

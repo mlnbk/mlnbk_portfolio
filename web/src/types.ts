@@ -3,7 +3,14 @@ export type Galaxy = {
   title: string;
   description: string;
   projects: string[];
+  highlightedProjects?: HighlightedProject[];
   color: { colorRep: number };
+};
+
+export type HighlightedProject = {
+  name: string;
+  link: string;
+  technologies: string[];
 };
 
 export type GithubProject = {
