@@ -7,12 +7,13 @@ import { BsChevronLeft } from 'react-icons/bs';
 import { isChrome } from 'react-device-detect';
 
 import { galaxyData, galaxyOrbitSpeeds } from '../constans';
-import { Planet, Star } from '../types';
 import { useGalaxy } from '../Hooks/useGalaxy';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
 
 import List from '../Components/List';
 import InfoTitle from '../Components/InfoTitle';
+import useGithubProjects from '../Hooks/useGithubProjects';
+import HighlightedProjects from '../Components/HighlightedProjects';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
 const getUnit = () =>
@@ -26,6 +27,9 @@ const GalaxyDetails: FC = () => {
   const index = location.state?.index ?? 0;
   const galaxyDetails = galaxyData.find((galaxy) => galaxy.name === galaxyName);
   const { width, height } = getUnit();
+  const { projects, loading } = useGithubProjects(
+    galaxyDetails?.projects ?? [],
+  );
 
   if (!galaxyDetails) {
     return (
@@ -62,41 +66,61 @@ const GalaxyDetails: FC = () => {
           />
         </Canvas>
       </div>
-      <List
-        title={galaxyDetails.title}
-        description={galaxyDetails.description}
-        rightElement={
-          <Link to="/">
-            <BsChevronLeft size={20} />
-          </Link>
-        }
+      <div
+        className="
+          sm:max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]
+          mx-auto
+          grid gap-16
+          mt-14
+        "
       >
-        {galaxyDetails.projects.map((project, index) => (
-          <Link
-            to={project.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div
-              key={index}
-              className="py-4 hover:bg-gray-800 rounded-lg transition duration-100"
-            >
-              <h3 className="text-base md:text-lg lg:text-xl font-semibold">
-                {project.title}
-              </h3>
-              <p className="text-sm md:text-base text-gray-500 mt-2">
-                {project.description}
-              </p>
+        <HighlightedProjects projects={[]} />
+        <List
+          title={galaxyDetails.title}
+          description={galaxyDetails.description}
+          rightElement={
+            <Link to="/">
+              <BsChevronLeft size={20} />
+            </Link>
+          }
+        >
+          {loading ? (
+            <div className="flex justify-center items-center text-gray-500">
+              Loading...
             </div>
-          </Link>
-        ))}
-      </List>
+          ) : !projects || projects.length === 0 ? (
+            <div className="flex justify-center items-center text-gray-500">
+              Failed to fetch projects.
+            </div>
+          ) : (
+            projects.map((project, index) => (
+              <Link
+                to={project.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div
+                  key={index}
+                  className="py-4 hover:bg-gray-800 rounded-lg transition duration-100"
+                >
+                  <h3 className="text-base md:text-lg lg:text-xl font-semibold">
+                    {project.name}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-500 mt-2">
+                    {project.description}
+                  </p>
+                </div>
+              </Link>
+            ))
+          )}
+        </List>
+      </div>
     </div>
   );
 };
 
 const GalaxyScene: FC<{
-  planets: (Star | Planet)[];
+  planets: string[];
   starColor: number;
   speed: number;
 }> = ({ planets, speed, starColor }) => {
