@@ -12,17 +12,17 @@ const Card: FC<CardProps> = ({ name, link, technologies }) => {
       <div
         className="
           bg-gradient-to-br
-          from-gray-900
-          via-gray-800
-          to-gray-900
+          from-gray-950
+          via-slate-900
+          to-gray-950
           p-4 md:p-6 lg:p-8
           rounded-lg shadow-lg
           text-white text-left
           w-full min-h-[10rem] md:min-h-[12rem] lg:min-h-[14rem]
           flex flex-col justify-between
-          transition-all duration-100 ease-in-out
+          transition-all duration-200 ease-in-out
           border-2 border-transparent
-          hover:from-gray-800 hover:via-gray-900 hover:to-gray-800 hover:border-blue-500 hover cursor-pointer
+          hover:from-slate-900 hover:via-gray-950 hover:to-slate-900 hover:border-blue-500 hover cursor-pointer
         "
       >
         <div className="flex flex-col justify-center h-full">
