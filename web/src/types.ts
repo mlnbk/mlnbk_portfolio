@@ -2,24 +2,21 @@ export type Galaxy = {
   name: string;
   title: string;
   description: string;
-  projects: (Star | Planet)[];
+  projects: string[];
+  highlightedProjects?: HighlightedProject[];
   color: { colorRep: number };
 };
 
-export type Planet = {
-  title: string;
-  description: string;
-  links: {
-    github: string;
-  };
+export type HighlightedProject = {
+  name: string;
+  link: string;
+  technologies: string[];
 };
 
-export type Star = {
-  title: string;
+export type GithubProject = {
+  name: string;
+  html_url: string;
   description: string;
-  links: {
-    github: string;
-  };
 };
 
 export type GithubActivityResponse = {
