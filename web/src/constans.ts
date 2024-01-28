@@ -90,7 +90,7 @@ export const landingHighlightProjects: HighlightedProject[] = [
   },
   {
     name: 'Farming Data Analysis',
-    link: 'https://github.com/balazs-szabo99/mlnbk_portfolio',
+    link: 'https://github.com/balazs-szabo99/farming-climate-change',
     technologies: ['React', 'Chart.js', 'Python'],
   },
   {
