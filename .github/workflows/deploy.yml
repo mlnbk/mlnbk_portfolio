@@ -26,7 +26,8 @@ jobs:
           known_hosts: unnecessary
 
       - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+        # FIXME change IP to env variable
+        run: ssh-keyscan -H 116.203.211.123 >> ~/.ssh/known_hosts
 
       - name: Build and Deploy Web
         working-directory: web
@@ -42,7 +43,6 @@ jobs:
         env:
           REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
         run: |
-          npm install
           npm run build
           scp -r ./package.json ./dist root@116.203.211.123:/root/projects/portfolio/api
 
