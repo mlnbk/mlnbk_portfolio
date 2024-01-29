@@ -1,0 +1,55 @@
+name: Build and Deploy Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: Production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Build and deploy Web
+        working-directory: web
+        env:
+          WEB_URL: ${{ secrets.WEB_URL }}
+        run: |
+          npm install
+          npm run build
+          scp -r ./build/* root@116.203.211.123://root/projects/portfolio/web_build
+
+      - name: Build and deploy API
+        working-directory: api
+        env:
+          REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
+        run: |
+          npm install
+          npm run build
+          scp -r ./package.json ./dist root@116.203.211.123:/root/projects/portfolio/api
+
+      - name: SSH into remote server, NestJS-GitHub-Activity, restart API
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Run Commands on Remote Server
+        run: |
+          ssh root@116.203.211.123 << EOF
+            cd projects/nestjs-github-activity
+            npm link
+            cd ../portfolio/api
+            pkill -f node
+            npm install
+            npm link nestjs-github-activity
+            npm run start:prod
+          EOF
