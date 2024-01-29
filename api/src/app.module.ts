@@ -17,7 +17,7 @@ import { AppService } from './app.service';
       useFactory: async (configService: ConfigService) => ({
         userName: 'mlnbk',
         githubPersonalAccessToken: configService.get(
-          'GITHUB_PERSONAL_ACCESS_TOKEN',
+          'GH_PERSONAL_ACCESS_TOKEN',
         ),
       }),
       inject: [ConfigService],

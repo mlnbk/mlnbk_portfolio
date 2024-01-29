@@ -18,7 +18,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "github-service-library": ["node_modules/nestjs-github-activity/dist"]
+      "nestjs-github-activity": ["node_modules/nestjs-github-activity/dist"]
     }
   }
 }
