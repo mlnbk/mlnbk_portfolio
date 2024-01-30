@@ -50,7 +50,7 @@ jobs:
             cd ../portfolio/api
             pkill -f node
             npm install
-            npm run build
             npm link nestjs-github-activity
+            npm run build
             npm run start:prod
           EOF
