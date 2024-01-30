@@ -31,7 +31,7 @@ jobs:
       - name: Build and Deploy Web
         working-directory: web
         env:
-          WEB_URL: ${{ vars.WEB_URL }}
+          REACT_APP_API_BASE_URL: ${{ vars.REACT_APP_API_BASE_URL }}
         run: |
           npm install
           npm run build
@@ -39,11 +39,8 @@ jobs:
 
       - name: Build and deploy API
         working-directory: api
-        env:
-          REACT_APP_API_BASE_URL: ${{ vars.REACT_APP_API_BASE_URL }}
         run: |
-          npm run build
-          scp -r ./package.json ./dist root@116.203.211.123:/root/projects/portfolio/api
+          scp -r --exclude=node_modules --exclude=dist ./ root@116.203.211.123:/root/projects/portfolio/api
 
       - name: Run Commands on Remote Server
         run: |
@@ -53,6 +50,7 @@ jobs:
             cd ../portfolio/api
             pkill -f node
             npm install
+            npm run build
             npm link nestjs-github-activity
             npm run start:prod
           EOF
