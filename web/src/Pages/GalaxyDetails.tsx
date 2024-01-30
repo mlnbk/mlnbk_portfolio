@@ -54,14 +54,10 @@ const GalaxyDetails: FC = () => {
 
   return (
     <div
-      className={`
-        relative ${width} ${height} 
-        grid grid-flow-row grid-rows-[auto_1fr_1fr]
-        overflow-y-auto overflow-x-hidden
-      `}
+      className={`relative ${width} ${height} overflow-x-hidden cursor-default`}
     >
       <InfoTitle title={galaxyDetails.title} details={['Projects']} />
-      <div className="w-full h-[50vh]">
+      <div className={`w-full h-[50vh]`}>
         <Canvas camera={{ position: [0, 0, 1] }}>
           <GalaxyScene
             planets={galaxyDetails.projects}
@@ -120,7 +116,7 @@ const GalaxyDetails: FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div className="py-4 hover:bg-gray-800 rounded-lg transition duration-100">
+                <div className="-mx-2 px-2 py-4 hover:bg-gray-800 rounded-lg transition duration-100">
                   <h3 className="text-base md:text-lg lg:text-xl font-semibold">
                     {project.name}
                   </h3>
