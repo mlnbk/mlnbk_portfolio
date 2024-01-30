@@ -40,7 +40,7 @@ jobs:
       - name: Build and deploy API
         working-directory: api
         run: |
-          scp -r --exclude=node_modules --exclude=dist ./ root@116.203.211.123:/root/projects/portfolio/api
+          rsync -av --exclude=node_modules --exclude=dist ./ root@116.203.211.123:/root/projects/portfolio/api
 
       - name: Run Commands on Remote Server
         run: |
