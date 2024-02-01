@@ -18,7 +18,7 @@ const Card: FC<HighlightedProject> = ({ name, link, technologies }) => {
           flex flex-col justify-between
           transition-all duration-200 ease-in-out
           border-2 border-transparent
-          hover:from-slate-900 hover:via-gray-950 hover:to-slate-900 hover:border-blue-500 hover cursor-pointer
+          hover:from-slate-900 hover:via-gray-950 hover:to-slate-900 hover:border-blue-500 hover:cursor-pointer
         "
       >
         <div className="flex flex-col justify-center h-full">
