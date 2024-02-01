@@ -17,6 +17,7 @@ import InfoTitle from '../Components/InfoTitle';
 import GithubActivityListElement from '../Components/GithubActivityListElement';
 import Dropdown from '../Components/Dropdown';
 import HighlightedProjects from '../Components/HighlightedProjects';
+import Contact from '../Components/Contact';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
 const getUnit = () =>
@@ -54,11 +55,12 @@ const Universe: FC = () => {
         className="
           sm:max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]
           mx-auto
-          grid gap-16
+          grid gap-16 md:gap-32
           mt-14
         "
       >
         <HighlightedProjects projects={highlightedProjects} />
+        <Contact />
         <List
           isLoading={isLoading}
           error={error}
