@@ -29,7 +29,7 @@ const Universe: FC = () => {
   const galaxyPositions = useGalaxyPositions();
   const { width, height } = getUnit();
   const dropdownOptions = [10, 20, 50, 100];
-  const [limit, setLimit] = useState(20);
+  const [limit, setLimit] = useState(dropdownOptions[0]);
   const { data, isLoading, error } = useGithubActivity(limit);
 
   return (

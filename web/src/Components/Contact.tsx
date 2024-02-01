@@ -1,6 +1,9 @@
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 import { BsGithub, BsLinkedin } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+
+import Input from './Input';
 
 type Inputs = {
   name: string;
@@ -42,24 +45,48 @@ const Contact: FC = () => {
           md:col-start-3 md:col-span-3
         "
       >
-        <input {...register('name', { required: true })} placeholder="Name" />
-        {errors.name && <span>This field is required</span>}
-
-        <input
-          {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-          placeholder="Email"
+        <Input
+          name={'name'}
+          register={register as unknown as UseFormRegister<FieldValues>}
+          registerOptions={{ required: true }}
+          placeholder={'Name'}
+          error={errors.name && 'This field is required.'}
         />
-        {errors.email && (
-          <span>This field is required and should be a valid email</span>
-        )}
-
-        <textarea
-          {...register('message', { required: true })}
-          placeholder="Message"
+        <Input
+          name={'email'}
+          register={register as unknown as UseFormRegister<FieldValues>}
+          registerOptions={{
+            required: true,
+            pattern: /^\S+@\S+$/i,
+          }}
+          placeholder={'Email'}
+          error={
+            errors.email &&
+            'This field is required and should be a valid email.'
+          }
         />
-        {errors.message && <span>This field is required</span>}
-
-        <input type="submit" />
+        <Input
+          name="message"
+          register={register as unknown as UseFormRegister<FieldValues>}
+          registerOptions={{ required: true }}
+          placeholder={'Message'}
+          textarea
+          error={errors.message && 'This field is required.'}
+        />
+        <button
+          type="submit"
+          className="
+            w-min mx-auto
+            bg-blue-800 font-medium
+            py-2 px-4 md:px-6 lg:px-8
+            rounded-lg shadow-lg
+            transition-all duration-200 ease-in-out
+            border-2 border-transparent
+            hover:bg-blue-700 hover:border-blue-500 hover:cursor-pointer
+          "
+        >
+          Submit
+        </button>
       </form>
 
       <div
@@ -78,9 +105,13 @@ const Contact: FC = () => {
             <hr />
           </div>
         </div>
-        <div className="flex gap-4 justify-center">
-          <BsLinkedin size={32} />
-          <BsGithub size={32} />
+        <div className="flex gap-8 justify-center">
+          <Link to="https://www.linkedin.com/in/milan-bako">
+            <BsLinkedin size={24} />
+          </Link>
+          <Link to="https://github.com/mlnbk/mlnbk_portfolio">
+            <BsGithub size={24} />
+          </Link>
         </div>
       </div>
     </div>

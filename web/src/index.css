@@ -20,3 +20,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+    -webkit-box-shadow: 0 0 0 30px rgba(17, 24, 39, 0.8) inset !important;
+    caret-color: white;
+    border: 1px solid #ffffff;
+    border-radius: 0.5rem; 
+    color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+input:-webkit-autofill:hover {
+  border-color: #3C91E6;
+}
+
+input:-webkit-autofill:focus {
+  border: 1px solid rgba(37, 99, 235);
+}
