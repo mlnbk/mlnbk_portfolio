@@ -36,8 +36,8 @@ export class AppController {
   @Post('/contact')
   async sendContactEmail(@Body() body: SendContactEmailBody) {
     const transporter = nodemailer.createTransport({
-      port: 465,
-      secure: true,
+      port: 587,
+      secure: false,
       service: 'gmail',
       auth: {
         user: this.configService.get('GMAIL_USERNAME'),
