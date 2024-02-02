@@ -17,6 +17,7 @@ const Contact: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Inputs>();
   const [successText, setSuccessText] = useState<string>();
   const { sendEmail, isLoading, error } = useSendEmail();
@@ -24,6 +25,7 @@ const Contact: FC = () => {
     setSuccessText('');
     const response = await sendEmail(data);
     setSuccessText(response);
+    reset();
   };
 
   return (
