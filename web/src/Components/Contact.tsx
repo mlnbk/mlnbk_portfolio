@@ -101,7 +101,9 @@ const Contact: FC = () => {
         {error && (
           <span className="text-sm text-red-500 text-center">{error}</span>
         )}
-        {error && <span className="text-sm text-center">{error}</span>}
+        {successText && (
+          <span className="text-sm text-center">{successText}</span>
+        )}
       </form>
 
       <div
