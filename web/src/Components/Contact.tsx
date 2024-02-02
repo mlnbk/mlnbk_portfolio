@@ -4,6 +4,7 @@ import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 import Input from './Input';
+import { useSendEmail } from '../Hooks/useSendEmail';
 
 type Inputs = {
   name: string;
@@ -17,7 +18,10 @@ const Contact: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit = (data: Inputs) => console.log(data);
+  const { sendEmail, isLoading, error } = useSendEmail();
+  const onSubmit = async (data: Inputs) => {
+    await sendEmail(data);
+  };
 
   return (
     <div
@@ -30,7 +34,7 @@ const Contact: FC = () => {
       <div
         className="
           my-auto md:row-span-2 md:col-span-2
-          text-xl md:text-2xl lg:text-3xl 2xl:text-4xl
+          text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl
         "
       >
         <h2 className="font-medium">
@@ -75,18 +79,26 @@ const Contact: FC = () => {
         />
         <button
           type="submit"
-          className="
+          disabled={isLoading}
+          className={`
             w-min mx-auto
             bg-blue-800 font-medium
-            py-2 px-4 md:px-6 lg:px-8
+            py-1 px-2 md:px-4 
             rounded-lg shadow-lg
             transition-all duration-200 ease-in-out
             border-2 border-transparent
             hover:bg-blue-700 hover:border-blue-500 hover:cursor-pointer
-          "
+            disabled:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-transparent
+          `}
         >
-          Submit
+          {isLoading ? 'Sending...' : 'Submit'}
         </button>
+        {error && (
+          <span className="text-sm text-red-500">
+            Failed to submit contact email. Please try again or check out my
+            LinkedIn or Github.
+          </span>
+        )}
       </form>
 
       <div
