@@ -9,6 +9,7 @@ import {
 } from 'nestjs-github-activity';
 
 import { SendContactEmailBody } from './types';
+import { Throttle } from '@nestjs/throttler';
 
 @Controller()
 export class AppController {
@@ -31,6 +32,7 @@ export class AppController {
     return activities;
   }
 
+  @Throttle({ default: { limit: 1, ttl: 60000 } }) // 1 per minute
   @Post('/contact')
   async sendContactEmail(@Body() body: SendContactEmailBody) {
     const transporter = nodemailer.createTransport({

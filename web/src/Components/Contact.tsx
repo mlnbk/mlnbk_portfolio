@@ -97,12 +97,7 @@ const Contact: FC = () => {
         >
           {isLoading ? 'Sending...' : 'Submit'}
         </button>
-        {error && (
-          <span className="text-sm text-red-500">
-            Failed to submit contact email. Please try again or check out my
-            LinkedIn or Github.
-          </span>
-        )}
+        {error && <span className="text-sm text-red-500">{error}</span>}
         {successText}
       </form>
 
