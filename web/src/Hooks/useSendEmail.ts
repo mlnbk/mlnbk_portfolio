@@ -8,7 +8,7 @@ type Inputs = {
 
 export const useSendEmail = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error>();
+  const [error, setError] = useState<string>();
 
   const sendEmail = async (data: Inputs) => {
     setIsLoading(true);
@@ -27,7 +27,14 @@ export const useSendEmail = () => {
       );
 
       if (!response.ok) {
-        throw new Error('Failed to send email');
+        if (response.status === 429) {
+          throw new Error(
+            'One contact request is allowed per minute for security reasons. Please try again in a minute.',
+          );
+        }
+        throw new Error(
+          'Failed to submit contact email. Please try again or check out my LinkedIn or Github.',
+        );
       }
       return 'Email sent successfully.';
     } catch (error: any) {

@@ -4,7 +4,7 @@ interface ListProps {
   children: ReactNode;
   rightElement?: JSX.Element;
   isLoading?: boolean;
-  error?: Error;
+  error?: string;
   title: string;
   description?: string;
 }
@@ -43,7 +43,7 @@ const List: FC<ListProps> = ({
         </div>
       ) : error ? (
         <div className="flex justify-center items-center text-gray-500">
-          Error: {String(error)}
+          {error}
         </div>
       ) : (
         <div className="grid grid-flow-row divide-y">{children}</div>
