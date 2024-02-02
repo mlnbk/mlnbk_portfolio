@@ -9,7 +9,7 @@ import {
 export const useGithubActivity = (limit = 20) => {
   const [data, setData] = useState<DisplayedActivity[] | undefined>();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error>();
+  const [error, setError] = useState<string>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +19,12 @@ export const useGithubActivity = (limit = 20) => {
           `${process.env.REACT_APP_API_BASE_URL}/github-activities?limit=${limit}`,
         );
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          if (response.status === 429) {
+            throw new Error('Too many requests. Please try again later.');
+          }
+          throw new Error(
+            `Failed to fetch activities. Please try again later.`,
+          );
         }
         const data: GithubActivityResponse = await response.json();
         setData(
