@@ -50,7 +50,6 @@ const Contact: FC = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="
-          text-center
           grid grid-flow-row gap-4
           md:col-start-3 md:col-span-3
         "
@@ -99,8 +98,10 @@ const Contact: FC = () => {
         >
           {isLoading ? 'Sending...' : 'Submit'}
         </button>
-        {error && <span className="text-sm text-red-500">{error}</span>}
-        {successText}
+        {error && (
+          <span className="text-sm text-red-500 text-center">{error}</span>
+        )}
+        {error && <span className="text-sm text-center">{error}</span>}
       </form>
 
       <div
