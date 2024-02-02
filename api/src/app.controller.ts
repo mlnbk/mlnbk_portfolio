@@ -36,6 +36,8 @@ export class AppController {
   @Post('/contact')
   async sendContactEmail(@Body() body: SendContactEmailBody) {
     const transporter = nodemailer.createTransport({
+      port: 465,
+      secure: true,
       service: 'gmail',
       auth: {
         user: this.configService.get('GMAIL_USERNAME'),
@@ -50,16 +52,11 @@ export class AppController {
       text: `New contact form submission from ${body.name} with email ${body.email}. \nMessage: ${body.message}`,
     };
 
-    await new Promise((resolve, reject) => {
-      transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-          console.error(err);
-          reject('Failed to send email');
-        } else {
-          console.log('Email sent: ' + info.response);
-          resolve(info);
-        }
-      });
-    });
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log('Email sent: ' + info.response);
+    } catch (error) {
+      throw new Error('Failed to send email');
+    }
   }
 }
