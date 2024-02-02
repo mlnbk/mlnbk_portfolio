@@ -12,6 +12,7 @@ export const useSendEmail = () => {
 
   const sendEmail = async (data: Inputs) => {
     setIsLoading(true);
+    setError(undefined);
 
     try {
       const response = await fetch(
@@ -28,6 +29,7 @@ export const useSendEmail = () => {
       if (!response.ok) {
         throw new Error('Failed to send email');
       }
+      return 'Email sent successfully.';
     } catch (error: any) {
       setError(error.message);
     } finally {

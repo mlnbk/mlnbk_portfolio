@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
 import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
@@ -18,9 +18,12 @@ const Contact: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  const [successText, setSuccessText] = useState<string>();
   const { sendEmail, isLoading, error } = useSendEmail();
   const onSubmit = async (data: Inputs) => {
-    await sendEmail(data);
+    setSuccessText('');
+    const response = await sendEmail(data);
+    setSuccessText(response);
   };
 
   return (
@@ -45,6 +48,7 @@ const Contact: FC = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="
+          text-center
           grid grid-flow-row gap-4
           md:col-start-3 md:col-span-3
         "
@@ -99,6 +103,7 @@ const Contact: FC = () => {
             LinkedIn or Github.
           </span>
         )}
+        {successText}
       </form>
 
       <div
