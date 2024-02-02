@@ -38,7 +38,7 @@ export class AppController {
     const transporter = nodemailer.createTransport({
       port: 587,
       secure: false,
-      service: 'gmail',
+      service: 'smtp.gmail.com',
       auth: {
         user: this.configService.get('GMAIL_USERNAME'),
         pass: this.configService.get('GMAIL_PASSWORD'),
