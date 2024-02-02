@@ -50,11 +50,16 @@ export class AppController {
       text: `New contact form submission from ${body.name} with email ${body.email}. \nMessage: ${body.message}`,
     };
 
-    try {
-      const info = await transporter.sendMail(mailOptions);
-      console.log('Email sent: ' + info.response);
-    } catch (error) {
-      throw new Error('Failed to send email');
-    }
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          console.error(err);
+          reject('Failed to send email');
+        } else {
+          console.log('Email sent: ' + info.response);
+          resolve(info);
+        }
+      });
+    });
   }
 }
