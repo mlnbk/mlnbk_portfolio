@@ -36,7 +36,7 @@ export const useSendEmail = () => {
           'Failed to submit contact email. Please try again or check out my LinkedIn or Github.',
         );
       }
-      return 'Email sent successfully.';
+      return 'Email sent successfully. You will be contacted soon.';
     } catch (error: any) {
       setError(error.message);
     } finally {
