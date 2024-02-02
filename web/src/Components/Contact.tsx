@@ -24,8 +24,10 @@ const Contact: FC = () => {
   const onSubmit = async (data: Inputs) => {
     setSuccessText('');
     const response = await sendEmail(data);
-    setSuccessText(response);
-    reset();
+    if (response) {
+      setSuccessText(response);
+      reset();
+    }
   };
 
   return (
