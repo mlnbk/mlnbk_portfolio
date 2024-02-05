@@ -14,6 +14,8 @@ export const useGithubActivity = (limit = 20) => {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
+      setError(undefined);
+
       try {
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/github-activities?limit=${limit}`,
