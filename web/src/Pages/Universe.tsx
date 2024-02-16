@@ -18,6 +18,7 @@ import GithubActivityListElement from '../Components/GithubActivityListElement';
 import Dropdown from '../Components/Dropdown';
 import HighlightedProjects from '../Components/HighlightedProjects';
 import Contact from '../Components/Contact';
+import About from '../Components/About';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
 const getUnit = () =>
@@ -60,6 +61,7 @@ const Universe: FC = () => {
         "
       >
         <HighlightedProjects projects={highlightedProjects} />
+        <About />
         <Contact />
         <List
           isLoading={isLoading}
