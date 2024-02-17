@@ -2,7 +2,7 @@ import { Galaxy, HighlightedProject } from './types';
 
 export const dynamicGalaxyPositions = (arrayLength: number) => {
   const positions = [];
-  let radius = 0.3;
+  let radius = 0.37;
   let angleIncrement = (2.1 * Math.PI) / arrayLength;
 
   if (arrayLength === 1) {
@@ -40,7 +40,7 @@ export const planetPositions = [
   { x: 0.2367, y: -0.0369, z: 0.0963 },
 ];
 
-export const planetScreenFactor = 0.0005;
+export const planetScreenFactor = 0.00075;
 
 export const maxPlanetRadius = 0.02;
 export const maxStarRadius = 0.001;
@@ -128,3 +128,6 @@ export const highlightedProjects: { [key: string]: HighlightedProject[] } = {
     },
   ],
 };
+
+export const languages = ['TypeScript', 'JavaScript', 'Python', 'Dart'];
+export const frameworks = ['React', 'Next.js', 'NestJS', 'Flask', 'Flutter'];
