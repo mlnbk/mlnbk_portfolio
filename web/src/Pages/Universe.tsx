@@ -18,6 +18,7 @@ import GithubActivityListElement from '../Components/GithubActivityListElement';
 import Dropdown from '../Components/Dropdown';
 import HighlightedProjects from '../Components/HighlightedProjects';
 import Contact from '../Components/Contact';
+import About from '../Components/About';
 
 // See issue: https://bugs.chromium.org/p/chromium/issues/detail?id=1093055
 const getUnit = () =>
@@ -35,7 +36,7 @@ const Universe: FC = () => {
   return (
     <div className={`relative ${width} ${height} overflow-x-hidden`}>
       <InfoTitle title="Milan Bako" details={['Software Engineer']} />
-      <div className="w-full h-[85vh]">
+      <div className="w-full h-[80vh] md:h-[85vh]">
         <Canvas id="galaxy-canvas" camera={{ position: [0, 0, 1] }}>
           <ambientLight color={0xffffff} intensity={1} />
           {galaxyData.map((galaxy, index) => (
@@ -60,6 +61,7 @@ const Universe: FC = () => {
         "
       >
         <HighlightedProjects projects={highlightedProjects} />
+        <About />
         <Contact />
         <List
           isLoading={isLoading}

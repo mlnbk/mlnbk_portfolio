@@ -30,6 +30,11 @@ const Galaxy: FC<GalaxyProps> = ({
   const planetContainer = useRef<THREE.Group>(new THREE.Group());
   const starsContainer = useRef<THREE.Group>(new THREE.Group());
   const [isHovered, setIsHovered] = useState<boolean>();
+  const textPosition = new THREE.Vector3(
+    position.x,
+    position.y - (size.width < 640 ? 0.16 : 0.26),
+    position.z,
+  );
 
   const handleGalaxyClick = () => {
     navigate(`/${id}`, { state: { index } });
@@ -41,7 +46,6 @@ const Galaxy: FC<GalaxyProps> = ({
     planets: galaxyData.projects,
     starColor,
     position,
-    scale: size.width < 640 ? 1.2 : size.width < 768 ? 1.1 : 1,
   });
 
   useGalaxyRotation({
@@ -54,7 +58,7 @@ const Galaxy: FC<GalaxyProps> = ({
   return (
     <>
       <Text
-        position={[position.x, position.y - 0.18, position.z]} // TODO make dependent on screen size
+        position={textPosition}
         rotation={camera.rotation}
         color="white"
         fontSize={0.025}
