@@ -36,7 +36,7 @@ const Universe: FC = () => {
   return (
     <div className={`relative ${width} ${height} overflow-x-hidden`}>
       <InfoTitle title="Milan Bako" details={['Software Engineer']} />
-      <div className="w-full h-[85vh]">
+      <div className="w-full h-[80vh] md:h-[85vh]">
         <Canvas id="galaxy-canvas" camera={{ position: [0, 0, 1] }}>
           <ambientLight color={0xffffff} intensity={1} />
           {galaxyData.map((galaxy, index) => (

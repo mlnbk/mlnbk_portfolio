@@ -20,7 +20,7 @@ const Input: FC<InputProps> = ({
 }) => {
   const classNames = `
     px-4 py-2
-    bg-gray-900 bg-opacity-80 border border-white rounded-lg text-white 
+    bg-gray-900 bg-opacity-95 border border-white rounded-lg text-white 
     hover:border-sky-900
     focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-transparent
     transition-all duration-200 ease-in-out

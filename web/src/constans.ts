@@ -2,7 +2,7 @@ import { Galaxy, HighlightedProject } from './types';
 
 export const dynamicGalaxyPositions = (arrayLength: number) => {
   const positions = [];
-  let radius = 0.35;
+  let radius = 0.37;
   let angleIncrement = (2.1 * Math.PI) / arrayLength;
 
   if (arrayLength === 1) {
