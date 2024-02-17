@@ -128,3 +128,6 @@ export const highlightedProjects: { [key: string]: HighlightedProject[] } = {
     },
   ],
 };
+
+export const languages = ['TypeScript', 'JavaScript', 'Python', 'Dart'];
+export const frameworks = ['React', 'Next.js', 'NestJS', 'Flask', 'Flutter'];
