@@ -22,8 +22,8 @@ const About = () => {
           An experienced full-stack software engineer, all about getting things
           done effectively and efficiently. Being highly detail-oriented, I
           bring reliability to every project. I'm flexible, consistently seeking
-          ways to enhance my skills and adapt to new technologies, with that
-          ensuring that I deliver exceptional results.
+          ways to enhance my skills and adapt to new technologies, to ensure
+          that I deliver exceptional results.
         </p>
       </div>
       <div className="md:col-start-2 grid grid-cols-1 gap-3 select-none">
