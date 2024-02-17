@@ -1,9 +1,9 @@
 const About = () => {
   return (
-    <div className="grid grid-cols-[20%_auto] grid-rows-1 gap-16 items-center p-8 text-white">
-      <div className="flex items-center justify-center w-48 h-48 rounded-full bg-gray-500 border-4 border-blue-900 justify-self-center">
+    <div className="grid grid-cols-[20%_auto] grid-rows-1 gap-10 lg:gap-16 items-center p-10 text-white">
+      <div className="flex items-center justify-center w-28 h-28 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full bg-gray-500 border-4 border-indigo-950 justify-self-center">
         <img
-          src="avatar.jpg"
+          src="avatar.jpeg"
           alt="Avatar"
           className="w-full h-full rounded-full"
         />
