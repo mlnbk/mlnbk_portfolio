@@ -1,6 +1,7 @@
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 import { Body, Controller, Get, Inject, Post, Query } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { Throttle } from '@nestjs/throttler';
 import * as nodemailer from 'nodemailer';
 
 import {
@@ -9,7 +10,6 @@ import {
 } from 'nestjs-github-activity';
 
 import { SendContactEmailBody } from './types';
-import { Throttle } from '@nestjs/throttler';
 
 @Controller()
 export class AppController {
