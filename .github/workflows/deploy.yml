@@ -27,7 +27,8 @@ jobs:
 
       - name: Adding Known Hosts
         run: |
-          echo ${{ secrets.SSH_PRIVATE_KEY }}
+          echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/id_rsa
+          echo ~/.ssh/id_rsa
           ssh-keyscan -H ${{vars.SERVER_IP}} >> ~/.ssh/known_hosts
 
       - name: Build and Deploy Web
