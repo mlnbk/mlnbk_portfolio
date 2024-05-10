@@ -26,7 +26,9 @@ jobs:
           known_hosts: unnecessary
 
       - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{vars.SERVER_IP}} >> ~/.ssh/known_hosts
+        run: |
+          echo ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-keyscan -H ${{vars.SERVER_IP}} >> ~/.ssh/known_hosts
 
       - name: Build and Deploy Web
         working-directory: web
