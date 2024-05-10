@@ -23,11 +23,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          name: id_rsa
           known_hosts: unnecessary
-
-      - name: Check private key
-        run: echo ${{ secrets.SSH_PRIVATE_KEY }} | sed 's/./& /g'
 
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{vars.SERVER_IP}} >> ~/.ssh/known_hosts
