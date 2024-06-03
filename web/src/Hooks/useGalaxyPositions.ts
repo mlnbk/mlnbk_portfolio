@@ -4,7 +4,7 @@ import {
   dynamicGalaxyPositions,
   galaxyData,
   galaxyScreenFactor,
-} from '../constans';
+} from '../constants';
 
 type GalaxyPosition = { x: number; y: number; z: number };
 

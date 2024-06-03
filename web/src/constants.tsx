@@ -1,3 +1,5 @@
+import { GiRank1, GiRank2, GiRank3 } from 'react-icons/gi';
+
 import { Galaxy, HighlightedProject } from './types';
 
 export const dynamicGalaxyPositions = (arrayLength: number) => {
@@ -89,14 +91,9 @@ export const landingHighlightProjects: HighlightedProject[] = [
     technologies: ['React', 'Three.js', 'TypeScript'],
   },
   {
-    name: 'Farming Data Analysis',
-    link: 'https://github.com/balazs-szabo99/farming-climate-change',
-    technologies: ['React', 'Chart.js', 'Python'],
-  },
-  {
-    name: 'Chat App',
-    link: 'https://github.com/mlnbk/chat_app',
-    technologies: ['Flutter', 'Dart', 'Firebase'],
+    name: 'Property Analyzer',
+    link: 'https://property.mlnbk.com',
+    technologies: ['React', 'NestJS', 'Python'],
   },
 ];
 
@@ -129,12 +126,17 @@ export const highlightedProjects: { [key: string]: HighlightedProject[] } = {
   ],
 };
 
-export const languages = ['TypeScript', 'JavaScript', 'Python', 'Dart'];
+export const languages = [
+  { name: 'TypeScript', icon: <GiRank3 /> },
+  { name: 'JavaScript', icon: <GiRank3 /> },
+  { name: 'Python', icon: <GiRank2 /> },
+  { name: 'Dart', icon: <GiRank1 /> },
+];
 export const frameworks = [
-  'React',
-  'Next.js',
-  'Node.js',
-  'NestJS',
-  'Flask',
-  'Flutter',
+  { name: 'React', icon: <GiRank3 /> },
+  { name: 'Next.js', icon: <GiRank3 /> },
+  { name: 'NestJS', icon: <GiRank3 /> },
+  { name: 'Node.js', icon: <GiRank3 /> },
+  { name: 'Flask', icon: <GiRank2 /> },
+  { name: 'Flutter', icon: <GiRank1 /> },
 ];
