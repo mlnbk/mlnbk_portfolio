@@ -10,7 +10,7 @@ import {
   galaxyData,
   galaxyOrbitSpeeds,
   highlightedProjects,
-} from '../constans';
+} from '../constants';
 import { useGalaxy } from '../Hooks/useGalaxy';
 import { useGalaxyRotation } from '../Hooks/useGalaxyRotation';
 

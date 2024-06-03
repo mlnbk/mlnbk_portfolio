@@ -6,7 +6,7 @@ import {
   galaxyData,
   galaxyOrbitSpeeds,
   landingHighlightProjects as highlightedProjects,
-} from '../constans';
+} from '../constants';
 import { useGalaxyPositions } from '../Hooks/useGalaxyPositions';
 import { useGithubActivity } from '../Hooks/useGithubActivities';
 
@@ -78,7 +78,11 @@ const Universe: FC = () => {
           }
         >
           {data?.map((activity, index) => (
-            <GithubActivityListElement activity={activity} index={index} />
+            <GithubActivityListElement
+              key={index}
+              activity={activity}
+              index={index}
+            />
           ))}
           <Footer />
         </List>

@@ -1,4 +1,4 @@
-import { frameworks, languages } from '../constans';
+import { frameworks, languages } from '../constants';
 import Label from './Label';
 
 const About = () => {
@@ -26,15 +26,24 @@ const About = () => {
           that I deliver exceptional results.
         </p>
       </div>
-      <div className="md:col-start-2 grid grid-cols-1 gap-3 select-none">
-        <div className="flex gap-2">
-          {languages.map((language, index) => (
-            <Label key={index} text={language} />
+      <div className="md:col-start-2 col-span-2 grid grid-cols-1 gap-3 select-none">
+        <div className="flex gap-2 justify-start">
+          {languages.map((language) => (
+            <Label
+              key={language.name}
+              text={language.name}
+              icon={language.icon}
+            />
           ))}
         </div>
-        <div className="flex gap-2">
-          {frameworks.map((framework, index) => (
-            <Label key={index} text={framework} colorScheme="secondary" />
+        <div className="flex flex-wrap gap-2 justify-start">
+          {frameworks.map((framework) => (
+            <Label
+              key={framework.name}
+              text={framework.name}
+              icon={framework.icon}
+              colorScheme="secondary"
+            />
           ))}
         </div>
       </div>

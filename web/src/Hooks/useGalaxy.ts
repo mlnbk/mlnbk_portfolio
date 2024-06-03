@@ -8,7 +8,7 @@ import {
   numOfStars,
   planetPositions,
   planetScreenFactor,
-} from '../constans';
+} from '../constants';
 
 interface UseGalaxyProperties {
   planetContainer: MutableRefObject<THREE.Group>;
