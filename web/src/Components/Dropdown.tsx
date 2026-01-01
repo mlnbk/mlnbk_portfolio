@@ -33,22 +33,24 @@ const Dropdown: FC<DropdownProps> = ({ selected, options, onChange }) => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="
-          flex gap-1 px-2 py-1 items-center
-          border border-gray-300 rounded-md
-          focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+          flex gap-2 px-4 py-2 items-center
+          border border-gray-300 bg-white
+          focus:outline-none focus:border-gray-900
           cursor-pointer z-50
-          text-sm md:text-base
+          text-sm font-light
+          transition-colors
+          hover:border-gray-400
         "
       >
-        {selected}
-        {isOpen ? <BsChevronUp /> : <BsChevronDown />}
+        <span>Show {selected}</span>
+        {isOpen ? <BsChevronUp size={14} /> : <BsChevronDown size={14} />}
       </button>
       {isOpen && (
         <ul
           className="
-          absolute w-full mt-1
-          bg-gray-700 border-gray-300 rounded-md 
-          focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 
+          absolute right-0 mt-1 w-32
+          bg-white border border-gray-300
+          shadow-lg
           cursor-pointer z-50
           "
         >
@@ -57,9 +59,14 @@ const Dropdown: FC<DropdownProps> = ({ selected, options, onChange }) => {
               key={option}
               onClick={() => handleChange(option)}
               className={`
-              rounded-md px-2 py-1
-              text-sm md:text-base
-              ${selected === option ? 'bg-indigo-500' : 'hover:bg-gray-600'}`}
+              px-4 py-2
+              text-sm font-light
+              transition-colors
+              ${
+                selected === option
+                  ? 'bg-gray-100 text-gray-900'
+                  : 'text-gray-600 hover:bg-gray-50'
+              }`}
             >
               {option}
             </li>

@@ -1,12 +1,13 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+#!/bin/sh
+
+export PATH="/usr/local/bin:$PATH"
 
 # Prevent committing to main branch
 CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
-if [ "$CURRENT_BRANCH" == "main" ]; then
-  echo "You are not allowed to commit directly to the main branch. Please create a feature branch and make a pull request."
+if [ "$CURRENT_BRANCH" == "main"  ] || [ "$CURRENT_BRANCH" == "master"  ]; then
+  echo "You are not allowed to commit directly to the main/master branch. Please create a feature branch and make a pull request."
   exit 1
-fi 
+fi
 
 # API checks
 cd api

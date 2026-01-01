@@ -4,45 +4,34 @@ import { HighlightedProject } from '../types';
 
 const Card: FC<HighlightedProject> = ({ name, link, technologies }) => {
   return (
-    <a href={link} target="_blank" rel="noopener noreferrer">
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block group"
+    >
       <div
         className="
-          bg-gradient-to-br
-          from-gray-950
-          via-slate-900
-          to-gray-950
-          p-4 md:p-6 lg:p-8
-          rounded-lg shadow-lg
-          text-white text-left
-          w-full min-h-[10rem] md:min-h-[12rem] lg:min-h-[14rem]
+          p-6 md:p-8
+          border border-gray-200
+          hover:border-gray-400
+          transition-all duration-300 ease-in-out
+          h-full
           flex flex-col justify-between
-          transition-all duration-200 ease-in-out
-          border-2 border-transparent
-          hover:from-slate-900 hover:via-gray-950 hover:to-slate-900 hover:border-blue-500 hover:cursor-pointer
         "
       >
-        <div className="flex flex-col justify-center h-full">
-          <div className="text-xl md:text-2xl font-bold justify-center">
+        <div className="mb-6">
+          <h3 className="text-xl md:text-2xl font-light text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
             {name}
-          </div>
+          </h3>
         </div>
-        <div
-          className="
-            flex flex-col md:flex-row
-            justify-center
-            text-xs 2xl:text-base
-          "
-        >
+        <div className="flex flex-wrap gap-2">
           {technologies.map((tech, index) => (
-            <span key={index} className="md:flex">
+            <span key={index} className="text-xs text-gray-500 font-light">
               {tech}
-              <span
-                className={`${
-                  index < technologies.length - 1 && `mx-1`
-                } hidden md:block`}
-              >
-                {index < technologies.length - 1 && <>•</>}
-              </span>
+              {index < technologies.length - 1 && (
+                <span className="mx-1.5">·</span>
+              )}
             </span>
           ))}
         </div>

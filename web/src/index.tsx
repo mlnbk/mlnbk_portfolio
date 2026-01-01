@@ -5,8 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import GalaxyDetails from './Pages/GalaxyDetails';
-import Universe from './Pages/Universe';
+import Portfolio from './Pages/Portfolio';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -18,11 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Universe />,
-      },
-      {
-        path: '/:galaxyName',
-        element: <GalaxyDetails />,
+        element: <Portfolio />,
       },
     ],
   },
