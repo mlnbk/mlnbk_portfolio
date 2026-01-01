@@ -1,18 +1,16 @@
 import dayjs from 'dayjs';
 import { FC } from 'react';
-import { DisplayedActivity } from '../types';
+import { DisplayedActivity } from '@Types/types';
 
 interface GithubActivityListElementProps {
   activity: DisplayedActivity;
-  index: number;
 }
 
 const GithubActivityListElement: FC<GithubActivityListElementProps> = ({
   activity,
-  index,
 }) => {
   return (
-    <div key={index} className="py-6 md:py-8">
+    <div className="py-6 md:py-8">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
         <div className="flex-1">
           <h3 className="text-base md:text-lg font-light text-gray-900 capitalize mb-2">

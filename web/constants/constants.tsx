@@ -1,4 +1,4 @@
-import { HighlightedProject } from './types';
+import { HighlightedProject } from '@Types/types';
 
 export const landingHighlightProjects: HighlightedProject[] = [
   {

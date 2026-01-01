@@ -1,23 +1,22 @@
-import { FC } from 'react';
-import { FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form';
+import { Path, RegisterOptions, UseFormRegister } from 'react-hook-form';
 
-type InputProps = {
-  name: string;
-  register: UseFormRegister<FieldValues>;
-  registerOptions?: RegisterOptions;
+type InputProps<T extends Record<string, unknown>> = {
+  name: Path<T>;
+  register: UseFormRegister<T>;
+  registerOptions?: RegisterOptions<T>;
   placeholder: string;
   error?: string;
   textarea?: boolean;
 };
 
-const Input: FC<InputProps> = ({
+const Input = <T extends Record<string, unknown>>({
   register,
   registerOptions,
   name,
   placeholder,
   error,
   textarea,
-}) => {
+}: InputProps<T>) => {
   const classNames = `
     w-full
     px-4 py-3

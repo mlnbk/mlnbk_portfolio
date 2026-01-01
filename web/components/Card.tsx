@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { HighlightedProject } from '../types';
+import { HighlightedProject } from '@Types/types';
 
 const Card: FC<HighlightedProject> = ({ name, link, technologies }) => {
   return (
