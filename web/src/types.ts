@@ -1,12 +1,3 @@
-export type Galaxy = {
-  name: string;
-  title: string;
-  description: string;
-  projects: string[];
-  highlightedProjects?: HighlightedProject[];
-  color: { colorRep: number };
-};
-
 export type HighlightedProject = {
   name: string;
   link: string;
@@ -88,43 +79,43 @@ export const getGithubActivityDetails = (
 
 const GithubActivityDetails = {
   [GithubActivityType.CreateEvent]: {
-    title: 'stellar expansion',
+    title: 'Repository Created',
     description: 'created a commit in',
     emoji: '🚀',
   },
   [GithubActivityType.IssuesEvent]: {
-    title: 'celestial challenges',
+    title: 'Issue Activity',
     description: (action: Action) => `${action} an issue in`,
     emoji: '❗️',
   },
   [GithubActivityType.IssueCommentEvent]: {
-    title: 'nebula discourse',
+    title: 'Issue Comment',
     description: 'commented on an issue in',
     emoji: '💬',
   },
   [GithubActivityType.PullRequestEvent]: {
-    title: 'cosmic collaboration',
+    title: 'Pull Request',
     description: (action: Action) => `${action} a pull request in`,
     emoji: '🔀',
   },
   [GithubActivityType.PullRequestReviewEvent]: {
-    title: 'stellar review',
+    title: 'Pull Request Review',
     description: 'reviewed a pull request in',
     emoji: '👀',
   },
   [GithubActivityType.PullRequestReviewCommentEvent]: {
-    title: 'review comet',
+    title: 'Review Comment',
     description: 'commented on a pull request in',
     emoji: '💡',
   },
   [GithubActivityType.PushEvent]: {
-    title: 'stellar propulsion',
+    title: 'Code Push',
     description: 'pushed changes in',
     emoji: '📤',
   },
   [GithubActivityType.PublicEvent]: {
-    title: 'galactic genesis',
-    description: 'created a repository called',
+    title: 'Repository Public',
+    description: 'made a repository public:',
     emoji: '🌟',
   },
 };

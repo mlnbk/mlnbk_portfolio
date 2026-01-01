@@ -6,9 +6,6 @@ module.exports = {
       transitionDuration: {
         3000: '3000ms',
       },
-      fontFamily: {
-        voyager: ['Voyager', 'serif'],
-      },
     },
   },
   plugins: [],

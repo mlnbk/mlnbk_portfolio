@@ -8,11 +8,11 @@ type HighlightedProjectsProps = {
 
 const HighlightedProjects: FC<HighlightedProjectsProps> = ({ projects }) => {
   return (
-    <div className="px-4 md:p-0 select-none">
-      <h2 className="text-xl lg:text-2xl 2xl:text-3xl font-bold mb-4 text-white text-start">
-        Highlighted Projects
+    <section className="space-y-8">
+      <h2 className="text-3xl md:text-4xl font-light text-gray-900">
+        Featured Projects
       </h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {projects.map((project, index) => (
           <Card
             key={index}
@@ -21,24 +21,8 @@ const HighlightedProjects: FC<HighlightedProjectsProps> = ({ projects }) => {
             technologies={project.technologies}
           />
         ))}
-        {projects.length % 2 !== 0 && (
-          <div
-            className="
-              p-4 md:p-6 lg:p-8
-              rounded-lg shadow-lg
-              text-white text-left
-              w-full min-h-[10rem] md:min-h-[12rem] lg:min-h-[14rem]
-              flex flex-col
-              justify-center
-              text-xs 2xl:text-base font-medium
-              block md:hidden
-            "
-          >
-            And many more to find under the specific galaxies...
-          </div>
-        )}
       </div>
-    </div>
+    </section>
   );
 };
 

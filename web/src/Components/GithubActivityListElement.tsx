@@ -12,27 +12,27 @@ const GithubActivityListElement: FC<GithubActivityListElementProps> = ({
   index,
 }) => {
   return (
-    <div>
-      <div key={index} className="py-4 rounded-lg">
-        <div className="flex justify-between">
-          <h3 className="text-base md:text-lg font-semibold capitalize text-left">
+    <div key={index} className="py-6 md:py-8">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
+        <div className="flex-1">
+          <h3 className="text-base md:text-lg font-light text-gray-900 capitalize mb-2">
             {activity.emoji} {activity.title}
           </h3>
-          <p className="text-sm text-gray-500 text-right self-center">
-            {dayjs(activity.created_at).format('DD MMM YYYY, HH[h]')}
+          <p className="text-sm md:text-base text-gray-600 font-light first-letter:uppercase">
+            {activity.description} the{' '}
+            <a
+              href={activity.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-gray-900 transition-colors"
+            >
+              {activity.repoName}
+            </a>{' '}
+            repository.
           </p>
         </div>
-        <p className="text-gray-500 mt-2 first-letter:uppercase text-sm md:text-base">
-          {activity.description} the{' '}
-          <a
-            href={activity.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            {activity.repoName}
-          </a>{' '}
-          repository.
+        <p className="text-sm text-gray-500 font-light whitespace-nowrap">
+          {dayjs(activity.created_at).format('MMM DD, YYYY')}
         </p>
       </div>
     </div>
