@@ -1,4 +1,6 @@
-import { frameworks, languages } from '../constants';
+'use client';
+
+import { frameworks, languages } from '@Constants/constants';
 
 const About = () => {
   return (
@@ -6,7 +8,7 @@ const About = () => {
       <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
         <div className="flex-shrink-0">
           <img
-            src="avatar.jpeg"
+            src="/avatar.jpeg"
             alt="Milan Bako"
             className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover"
           />

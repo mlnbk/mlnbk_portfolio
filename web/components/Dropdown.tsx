@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useEffect, useRef, useState } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 

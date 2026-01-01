@@ -4,7 +4,7 @@ import {
   DisplayedActivity,
   getGithubActivityDetails,
   GithubActivityResponse,
-} from '../types';
+} from '@Types/types';
 
 export const useGithubActivity = (limit = 20) => {
   const [data, setData] = useState<DisplayedActivity[] | undefined>();
@@ -18,7 +18,7 @@ export const useGithubActivity = (limit = 20) => {
 
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/github-activities?limit=${limit}`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/github-activities?limit=${limit}`,
         );
         if (!response.ok) {
           if (response.status === 429) {

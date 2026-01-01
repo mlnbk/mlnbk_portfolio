@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Card from './Card';
-import { HighlightedProject } from '../types';
+import { HighlightedProject } from '@Types/types';
 
 type HighlightedProjectsProps = {
   projects: HighlightedProject[];

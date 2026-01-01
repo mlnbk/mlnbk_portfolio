@@ -17,7 +17,7 @@ export const useSendEmail = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/contact`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/contact`,
         {
           method: 'POST',
           headers: {
