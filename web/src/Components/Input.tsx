@@ -19,16 +19,19 @@ const Input: FC<InputProps> = ({
   textarea,
 }) => {
   const classNames = `
-    px-4 py-2
-    bg-gray-900 bg-opacity-95 border border-white rounded-lg text-white 
-    hover:border-sky-900
-    focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-transparent
-    transition-all duration-200 ease-in-out
+    w-full
+    px-4 py-3
+    bg-white border border-gray-300 text-gray-900
+    placeholder-gray-400
+    focus:outline-none focus:border-gray-900
+    transition-colors duration-200
+    font-light
     ${error && 'border-red-500'}
+    ${textarea ? 'min-h-[120px] resize-y' : ''}
   `;
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-2">
       {textarea ? (
         <textarea
           {...register(name, registerOptions)}
@@ -42,7 +45,9 @@ const Input: FC<InputProps> = ({
           className={classNames}
         />
       )}
-      {error && <span className="text-sm text-red-500">{error}</span>}
+      {error && (
+        <span className="text-sm text-red-600 font-light">{error}</span>
+      )}
     </div>
   );
 };
