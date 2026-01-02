@@ -19,9 +19,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
+    { "mode": "auto" }
   ],
   "eslint.validate": ["javascript", "typescript"],
   "files.eol": "\n",
@@ -31,6 +29,5 @@
     "**/build": true,
     "**/package-lock.json": true,
     "**/tsconfig.tsbuildinfo": true,
-    "web/playwright-report": true
   }
 }

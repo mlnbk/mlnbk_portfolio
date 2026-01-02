@@ -1,6 +1,7 @@
 # Portfolio
 
-A portfolio website showcasing my work as a software engineer. Built with React, TypeScript, and Tailwind CSS.
+A clean, minimalist portfolio website showcasing my work as a software engineer. Built with Next.js
+15, TypeScript, and Tailwind CSS.
 
 ## Features
 
@@ -11,19 +12,11 @@ A portfolio website showcasing my work as a software engineer. Built with React,
 - Showcase of featured projects
 - Skills and technologies overview
 
-## Project Structure
-
-The project is divided into two main parts:
-
-1. **API**: Backend application built with NestJS, serving data required by the frontend. See [api/README.md](api/README.md) for details.
-
-2. **Web**: Frontend application built with React and Tailwind CSS, providing a clean and professional user interface. See [web/README.md](web/README.md) for details.
-
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js (v18 or higher)
 - npm or yarn
 
 ### Installation
@@ -35,43 +28,68 @@ The project is divided into two main parts:
    cd mlnbk_portfolio
    ```
 
-2. Install backend dependencies:
+2. Install dependencies:
 
    ```bash
-   cd api
    npm install
    ```
 
-3. Install frontend dependencies:
+3. Create a `.env.local` file:
+
    ```bash
-   cd ../web
-   npm install
+   # Required for contact form
+   GMAIL_USERNAME=your-email@gmail.com
+   GMAIL_PASSWORD=your-app-password
+
+   # Optional: GitHub Personal Access Token for higher API rate limits
+   # Without this, GitHub API requests are limited to 60 requests/hour (unauthenticated)
+   # With a token, you get 5,000 requests/hour
+   # Get one at: https://github.com/settings/tokens (classic token, no scopes needed)
+   GH_PERSONAL_ACCESS_TOKEN=your-github-token
    ```
+
+   **Note:** The GitHub token is completely optional. The app works fine without it, but you'll have
+   lower rate limits. The contact form requires Gmail credentials.
 
 ### Running the Application
 
-1. Start the backend server:
+Start the development server:
 
-   ```bash
-   cd api
-   npm run start:dev
-   ```
+```bash
+npm run start:dev
+```
 
-   The API will run on `http://localhost:3001` (or the port specified in your environment).
+The application will run on `http://localhost:3000`.
 
-2. Start the frontend development server:
-   ```bash
-   cd web
-   npm run start
-   ```
-   The frontend will run on `http://localhost:3000`.
+### Building for Production
+
+```bash
+npm run build
+npm start
+```
 
 ## Technologies
 
-- **Frontend**: React, TypeScript, Tailwind CSS
-- **Backend**: NestJS, TypeScript
-- **Build Tool**: Create React App
+- **Framework**: Next.js 15
+- **Language**: TypeScript 5.5
+- **Styling**: Tailwind CSS
+- **Forms**: React Hook Form
+- **Email**: Nodemailer
 - **Package Manager**: npm
+
+## Project Structure
+
+```
+.
+├── app/              # Next.js App Router
+│   ├── api/         # API routes
+│   ├── layout.tsx   # Root layout
+│   └── page.tsx     # Home page
+├── components/       # React components
+├── hooks/           # Custom React hooks
+├── constants/       # Constants and configuration
+└── types/           # TypeScript type definitions
+```
 
 ## License
 
