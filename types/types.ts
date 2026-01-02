@@ -49,15 +49,8 @@ export type DisplayedActivity = {
   emoji: string;
 };
 
-const getDescription = (
-  description: string | ((action: Action) => string),
-  action?: string,
-) => {
-  if (
-    typeof description === 'function' &&
-    action &&
-    (action === 'opened' || action === 'closed')
-  ) {
+const getDescription = (description: string | ((action: Action) => string), action?: string) => {
+  if (typeof description === 'function' && action && (action === 'opened' || action === 'closed')) {
     return description(action);
   } else if (typeof description === 'string') {
     return description;
@@ -65,10 +58,7 @@ const getDescription = (
   return '';
 };
 
-export const getGithubActivityDetails = (
-  type: GithubActivityType,
-  action?: string,
-) => {
+export const getGithubActivityDetails = (type: GithubActivityType, action?: string) => {
   const details = GithubActivityDetails[type];
   return {
     title: details.title,
@@ -79,7 +69,7 @@ export const getGithubActivityDetails = (
 
 const GithubActivityDetails = {
   [GithubActivityType.CreateEvent]: {
-    title: 'Repository Created',
+    title: 'Commited Code',
     description: 'created a commit in',
     emoji: '🚀',
   },

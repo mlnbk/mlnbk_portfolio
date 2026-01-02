@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from 'react';
-import {
-  DisplayedActivity,
-  getGithubActivityDetails,
-  GithubActivityResponse,
-} from '@Types/types';
+import { useEffect, useState } from 'react';
+
+import { DisplayedActivity, getGithubActivityDetails, GithubActivityResponse } from '@Types/types';
 
 export const useGithubActivity = (limit = 20) => {
   const [data, setData] = useState<DisplayedActivity[] | undefined>();
@@ -17,16 +14,12 @@ export const useGithubActivity = (limit = 20) => {
       setError(undefined);
 
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/github-activities?limit=${limit}`,
-        );
+        const response = await fetch(`/api/github-activities?limit=${limit}`);
         if (!response.ok) {
           if (response.status === 429) {
             throw new Error('Too many requests. Please try again later.');
           }
-          throw new Error(
-            `Failed to fetch activities. Please try again later.`,
-          );
+          throw new Error(`Failed to fetch activities. Please try again later.`);
         }
         const data: GithubActivityResponse = await response.json();
         setData(
