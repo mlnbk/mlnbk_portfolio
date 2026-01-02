@@ -56,7 +56,7 @@ const Contact: FC = () => {
                 <BsLinkedin size={24} />
               </a>
               <a
-                href='https://github.com/mlnbk/mlnbk_portfolio'
+                href='https://github.com/mlnbk'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='text-gray-600 transition-colors hover:text-gray-900'
