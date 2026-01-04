@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsGithub, BsLinkedin } from 'react-icons/bs';
 
@@ -14,7 +14,7 @@ type Inputs = {
   message: string;
 };
 
-const Contact: FC = () => {
+const Contact = () => {
   const {
     register,
     handleSubmit,
@@ -37,13 +37,15 @@ const Contact: FC = () => {
       <div className='grid gap-12 md:grid-cols-2 md:gap-16'>
         <div className='space-y-8'>
           <div className='max-w-2xl'>
-            <h2 className='mb-4 text-3xl font-light text-gray-900 md:text-4xl'>Get in Touch</h2>
-            <p className='text-base font-light text-gray-600 md:text-lg'>
+            <h2 className='mb-4 text-3xl font-light text-gray-900 dark:text-gray-100 md:text-4xl'>
+              Get in Touch
+            </h2>
+            <p className='text-base font-light text-gray-600 dark:text-gray-400 md:text-lg'>
               Interested in working together? I'd love to hear from you.
             </p>
           </div>
           <div>
-            <h3 className='mb-4 text-sm font-medium uppercase tracking-wider text-gray-500'>
+            <h3 className='mb-4 text-sm font-medium uppercase tracking-wider text-gray-500 dark:text-gray-500'>
               Connect
             </h3>
             <div className='flex gap-6'>
@@ -51,7 +53,7 @@ const Contact: FC = () => {
                 href='https://www.linkedin.com/in/milan-bako'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-gray-900'
+                className='text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
               >
                 <BsLinkedin size={24} />
               </a>
@@ -59,7 +61,7 @@ const Contact: FC = () => {
                 href='https://github.com/mlnbk'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-600 transition-colors hover:text-gray-900'
+                className='text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
               >
                 <BsGithub size={24} />
               </a>
@@ -102,13 +104,14 @@ const Contact: FC = () => {
               font-light uppercase tracking-wider text-white
               transition-colors
               duration-200 hover:bg-gray-800
+              dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200
               disabled:cursor-not-allowed disabled:opacity-50
             '
           >
             {isLoading ? 'Sending...' : 'Send Message'}
           </button>
-          {error && <p className='text-sm text-red-600'>{error}</p>}
-          {successText && <p className='text-sm text-gray-600'>{successText}</p>}
+          {error && <p className='text-sm text-red-600 dark:text-red-400'>{error}</p>}
+          {successText && <p className='text-sm text-gray-600 dark:text-gray-400'>{successText}</p>}
         </form>
       </div>
     </section>

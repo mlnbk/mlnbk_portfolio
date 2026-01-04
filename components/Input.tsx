@@ -25,12 +25,13 @@ const Input = <T extends Record<string, unknown>>({
     focus:outline-none focus:border-gray-900
     transition-colors duration-200
     font-light
-    ${error && 'border-red-500'}
+    dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-gray-500
+    ${error && 'border-red-500 dark:border-red-500'}
     ${textarea ? 'min-h-[120px] resize-y' : ''}
   `;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className='flex flex-col gap-2'>
       {textarea ? (
         <textarea
           {...register(name, registerOptions)}
@@ -44,9 +45,7 @@ const Input = <T extends Record<string, unknown>>({
           className={classNames}
         />
       )}
-      {error && (
-        <span className="text-sm text-red-600 font-light">{error}</span>
-      )}
+      {error && <span className='text-sm font-light text-red-600 dark:text-red-400'>{error}</span>}
     </div>
   );
 };
