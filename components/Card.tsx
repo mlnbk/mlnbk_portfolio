@@ -1,37 +1,29 @@
-import { FC } from 'react';
-
 import { HighlightedProject } from '@Types/types';
 
-const Card: FC<HighlightedProject> = ({ name, link, technologies }) => {
+const Card = ({ name, link, technologies }: HighlightedProject) => {
   return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block group"
-    >
+    <a href={link} target='_blank' rel='noopener noreferrer' className='group block'>
       <div
-        className="
-          p-6 md:p-8
-          border border-gray-200
-          hover:border-gray-400
-          transition-all duration-300 ease-in-out
-          h-full
-          flex flex-col justify-between
-        "
+        className='
+          flex h-full
+          flex-col justify-between
+          border
+          border-gray-200 p-6 transition-all
+          duration-300
+          ease-in-out hover:border-gray-400 
+          dark:border-gray-800 dark:hover:border-gray-700 md:p-8
+        '
       >
-        <div className="mb-6">
-          <h3 className="text-xl md:text-2xl font-light text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
+        <div className='mb-6'>
+          <h3 className='mb-2 text-xl font-light text-gray-900 transition-colors group-hover:text-gray-700 dark:text-gray-100 dark:group-hover:text-gray-300 md:text-2xl'>
             {name}
           </h3>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className='flex flex-wrap gap-2'>
           {technologies.map((tech, index) => (
-            <span key={index} className="text-xs text-gray-500 font-light">
+            <span key={index} className='text-xs font-light text-gray-500 dark:text-gray-400'>
               {tech}
-              {index < technologies.length - 1 && (
-                <span className="mx-1.5">·</span>
-              )}
+              {index < technologies.length - 1 && <span className='mx-1.5'>·</span>}
             </span>
           ))}
         </div>
