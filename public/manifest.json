@@ -1,6 +1,7 @@
 {
-  "short_name": "Cosmic Odyssey",
-  "name": "Cosmic Odyssey - Personal Portfolio",
+  "short_name": "Milan Bako",
+  "name": "Milan Bako - Software Engineer Portfolio",
+  "description": "Senior software engineer and team lead based in Austria. Building scalable platforms and products that solve real business problems.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +19,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary"
 }
