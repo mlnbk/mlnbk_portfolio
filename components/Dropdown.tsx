@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
 interface DropdownProps {
@@ -9,7 +9,7 @@ interface DropdownProps {
   onChange: (newValue: number) => void;
 }
 
-const Dropdown: FC<DropdownProps> = ({ selected, options, onChange }) => {
+const Dropdown = ({ selected, options, onChange }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const handleChange = (newValue: number) => {
@@ -31,30 +31,32 @@ const Dropdown: FC<DropdownProps> = ({ selected, options, onChange }) => {
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className='relative' ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="
-          flex gap-2 px-4 py-2 items-center
+        className='
+          z-50 flex cursor-pointer items-center gap-2
           border border-gray-300 bg-white
-          focus:outline-none focus:border-gray-900
-          cursor-pointer z-50
+          px-4 py-2
           text-sm font-light
-          transition-colors
-          hover:border-gray-400
-        "
+          transition-colors hover:border-gray-400
+          focus:border-gray-900
+          focus:outline-none
+          dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-600 dark:focus:border-gray-500
+        '
       >
         <span>Show {selected}</span>
         {isOpen ? <BsChevronUp size={14} /> : <BsChevronDown size={14} />}
       </button>
       {isOpen && (
         <ul
-          className="
-          absolute right-0 mt-1 w-32
-          bg-white border border-gray-300
-          shadow-lg
-          cursor-pointer z-50
-          "
+          className='
+          absolute right-0 z-50 mt-1
+          w-32 cursor-pointer border
+          border-gray-300
+          bg-white shadow-lg
+          dark:border-gray-700 dark:bg-gray-800
+          '
         >
           {options.map((option) => (
             <li
@@ -66,8 +68,8 @@ const Dropdown: FC<DropdownProps> = ({ selected, options, onChange }) => {
               transition-colors
               ${
                 selected === option
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-600 hover:bg-gray-50'
+                  ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100'
+                  : 'text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-700'
               }`}
             >
               {option}
