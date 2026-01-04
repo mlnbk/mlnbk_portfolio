@@ -47,10 +47,10 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed left-0 right-0 top-0 z-50 transition-colors duration-200 ${
+      className={`fixed left-0 right-0 top-0 z-50 border-b transition-colors duration-200 ${
         isScrolled
-          ? 'border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/80'
-          : 'bg-white/90 backdrop-blur-sm dark:bg-gray-900/90'
+          ? 'border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/80'
+          : 'border-transparent bg-white/90 backdrop-blur-sm dark:border-transparent dark:bg-gray-900/90'
       }`}
     >
       <div className='mx-auto max-w-6xl px-6 md:px-12 lg:px-16'>
