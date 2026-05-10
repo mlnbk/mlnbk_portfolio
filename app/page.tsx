@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import {
   landingHighlightProjects as highlightedProjects,
+  landingPhysicalHighlights,
   structuredData,
 } from '@Constants/constants';
 
@@ -12,6 +13,7 @@ import Contact from '@Components/Contact';
 import Dropdown from '@Components/Dropdown';
 import Footer from '@Components/Footer';
 import GithubActivityListElement from '@Components/GithubActivityListElement';
+import HighlightedPhysicalProjects from '@Components/HighlightedPhysicalProjects';
 import HighlightedProjects from '@Components/HighlightedProjects';
 import List from '@Components/List';
 import Navigation from '@Components/Navigation';
@@ -28,22 +30,26 @@ export default function Home() {
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+
       <Navigation />
 
       {/* Hero Section */}
       <section className='mx-auto max-w-6xl px-6 pb-20 pt-24 md:px-12 md:pb-32 md:pt-32 lg:px-16'>
-        <h1 className='mb-4 text-5xl font-light tracking-tight text-gray-900 md:text-6xl lg:text-7xl dark:text-gray-100'>
+        <h1 className='mb-4 text-5xl font-light tracking-tight text-gray-900 dark:text-gray-100 md:text-6xl lg:text-7xl'>
           Milan Bako
         </h1>
-        <p className='text-xl font-light text-gray-600 md:text-2xl dark:text-gray-400'>
+        <p className='text-xl font-light text-gray-600 dark:text-gray-400 md:text-2xl'>
           Software Engineer
         </p>
       </section>
 
       {/* Main Content */}
-      <div className='mx-auto max-w-6xl space-y-24 px-6 pb-24 md:space-y-32 md:px-12 lg:px-16'>
+      <div className='mx-auto max-w-6xl space-y-20 px-6 pb-24 md:px-12 lg:px-16'>
         <div id='projects'>
           <HighlightedProjects projects={highlightedProjects} />
+        </div>
+        <div id='renovations'>
+          <HighlightedPhysicalProjects projects={landingPhysicalHighlights} />
         </div>
         <div id='about'>
           <About />

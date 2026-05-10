@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { usePathname, useRouter } from 'next/navigation';
+
 import { useTheme } from '@Hooks/useTheme';
 
 type NavItem = {
@@ -11,12 +13,15 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { label: 'Projects', id: 'projects' },
+  { label: 'Renovations & build', id: 'renovations' },
   { label: 'About', id: 'about' },
   { label: 'Contact', id: 'contact' },
   { label: 'Activity', id: 'activity' },
 ];
 
 const Navigation = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { isDark, toggleTheme } = useTheme();
@@ -24,7 +29,7 @@ const Navigation = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100; // Account for fixed header
+      const offset = 100;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -34,6 +39,15 @@ const Navigation = () => {
       });
     }
     setIsOpen(false);
+  };
+
+  const handleNavItemClick = (item: NavItem) => {
+    setIsOpen(false);
+    if (pathname === '/') {
+      scrollToSection(item.id);
+    } else {
+      router.push(`/#${item.id}`);
+    }
   };
 
   useEffect(() => {
@@ -60,7 +74,8 @@ const Navigation = () => {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                type='button'
+                onClick={() => handleNavItemClick(item)}
                 className='text-sm font-light text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
               >
                 {item.label}
@@ -98,7 +113,7 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className='flex items-center justify-center p-2 text-gray-600 transition-colors hover:text-gray-900 md:hidden dark:text-gray-400 dark:hover:text-gray-100'
+            className='flex items-center justify-center p-2 text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 md:hidden'
             aria-label='Toggle menu'
           >
             <svg
@@ -117,12 +132,13 @@ const Navigation = () => {
 
         {/* Mobile Navigation Menu */}
         {isOpen && (
-          <div className='border-t border-gray-200 bg-white pb-4 md:hidden dark:border-gray-800 dark:bg-gray-900'>
+          <div className='border-t border-gray-200 bg-white pb-4 dark:border-gray-800 dark:bg-gray-900 md:hidden'>
             <div className='flex flex-col gap-4 pt-4'>
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  type='button'
+                  onClick={() => handleNavItemClick(item)}
                   className='px-2 py-2 text-left text-sm font-light text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
                 >
                   {item.label}

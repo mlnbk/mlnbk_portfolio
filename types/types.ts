@@ -4,6 +4,37 @@ export type HighlightedProject = {
   technologies: string[];
 };
 
+export type PhysicalProjectImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
+export type PhysicalDevelopmentDetail = {
+  /** Opening notes on place, culture, what matters in the region. */
+  regionIntro: string[];
+  /**
+   * Optional short blurbs (distances, context). Do not put exact addresses, building names,
+   * unit numbers, or anything that identifies a private residence.
+   */
+  contextNotes?: string[];
+  /** Paragraphs paired in order with `processImages` for alternating layout. */
+  processStory: string[];
+  processImages: PhysicalProjectImage[];
+  /** Prose beside the first final image; falls back to that image's caption if omitted. */
+  finalIntro?: string;
+  finalImages: PhysicalProjectImage[];
+};
+
+export type PhysicalDevelopment = {
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+  imageSrc?: string;
+  detail: PhysicalDevelopmentDetail;
+};
+
 export type GithubProject = {
   name: string;
   html_url: string;

@@ -19,12 +19,12 @@ const About = () => {
               About
             </h2>
             <p className='text-base font-light leading-relaxed text-gray-600 dark:text-gray-400 md:text-lg'>
-              Senior software engineer and team lead based in Austria. I focus on building scalable
-              platforms and shipping products that solve real business problems. Whether it's
-              designing data layers, building scalable architectures or creating mobile apps from
-              scratch, I enjoy turning technical challenges into practical solutions that deliver
-              value. I believe in writing clean, maintainable code as the foundation for building
-              things that last.
+              Software engineer based in Austria. I focus on scalable platforms and products,
+              designing data layers, shipping mobile apps, and turning messy requirements into
+              something maintainable. I believe in writing clean, maintainable code as the
+              foundation for building things that last. I also take on renovation and construction
+              projects from time to time. Each build has a longer write-up behind the card in
+              Renovations & build.
             </p>
           </div>
           <div className='space-y-4'>
